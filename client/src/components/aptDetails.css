@@ -1,0 +1,111 @@
+
+
+.apt-details-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.details-review-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 90vh;
+}
+
+.scroll-reviews {
+  overflow-y: auto;
+}
+
+.apt-details-wrapper h1 {
+  font-size: 50px;
+}
+
+.apt-details-main {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.leave-review {
+  justify-self: flex-end;
+}
+
+.apt-details-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 230px;
+  width: 470px;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 20px;
+  
+}
+
+#title-input {
+  background: none;
+  border: none;
+  font-size: 15px;
+  width: 100%;
+  background-color: #f5f5f5;
+  height: 30px;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+ #description-input {
+  background: none;
+  border: none;
+  font-size: 15px;
+  width: 100%;
+  height: 85px;
+  margin-top: 27px;
+  resize: none;
+  background-color: #f5f5f5;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  padding: 4px; 
+} 
+
+
+
+.bed-bath-div {
+  display: flex;
+}
+
+#bath {
+  margin-right: 20px;
+}
+
+
+#apt-details-btn {
+  margin-top: 20px;
+  padding: 5px;
+  color: black;
+  border: 1px solid black;
+  border-radius: 7px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+#no-form {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 70px;
+  font-size: 30px;
+}
+
+
+.slider {
+  height: 100%;
+  width: 100%;
+}
+
+.slider-div {
+  width: 550px;
+  height: 220px;
+  border: 1px solid black;
+}

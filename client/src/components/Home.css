@@ -1,0 +1,108 @@
+
+
+
+body {
+  background-color: #ffffff;
+}
+
+.home-hero {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 92vh;
+  background-position: 30% 15%;
+  background-repeat: no-repeat;
+  background-image: url('https://images.unsplash.com/photo-1536376072261-38c75010e6c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80');
+}
+
+
+.home-hero h2 {
+  margin-top: 200px;
+  font-size: 50px;
+}
+
+.home-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-statement {
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 90px;
+  font-size: 20px;
+  width: 56%;
+}
+
+#apt-icon {
+  width: 270px;
+}
+
+#interior-icon {
+  width: 500px;
+}
+
+.icon-container {
+ 
+}
+
+#interior-icon-div {
+  border-radius: 31% 69% 38% 62% / 38% 42% 58% 62%;
+  width: 330px;
+  height: 270px;
+  background: linear-gradient(to right, rgb(223, 223, 223), lightgrey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+#apt-icon-div {
+  border-radius: 75% 25% 70% 30% / 30% 30% 70% 70%;
+  width: 330px;
+  height: 270px;
+  background: linear-gradient(to right, rgb(223, 223, 223), lightgrey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+}
+
+#phone-icon {
+  width: 450px;
+}
+
+#phone-icon-div {
+  border-radius: 61% 39% 57% 43% / 40% 23% 77% 60%;
+  width: 330px;
+  height: 270px;
+  background: linear-gradient(to left, rgb(223, 223, 223), lightgrey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 55px;
+  padding: 5px;
+}
+
+#apt-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#phone-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.text-wrap {
+  width: 370px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+}

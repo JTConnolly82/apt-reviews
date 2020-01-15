@@ -1,0 +1,11 @@
+/* account review size
+width: 200px;
+height: 140px; */
+
+.account-reviews {
+  display: grid;
+  grid-template-columns: 210px 210px 210px 210px;
+  grid-template-rows: 140px auto;
+  gap: 30px;
+  margin-top: 100px;
+}
