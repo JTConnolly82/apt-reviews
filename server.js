@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect(process.env.MONGO,
+mongoose.connect(process.env.MONGODB_URI,
   {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
