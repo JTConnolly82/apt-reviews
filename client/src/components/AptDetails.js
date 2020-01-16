@@ -25,7 +25,7 @@ class AptDetails extends React.Component {
       aptFormTitle: '',
       aptFormDescription: '',
       aptFormWouldRecommend: '',
-      // file: null
+      file: null
     }
   }
 
@@ -35,16 +35,6 @@ class AptDetails extends React.Component {
     axios.get(`/apartment/${_id}`).then(res => {
       this.setState({
         apt: res.data,
-        title: '',
-        description: '',
-        wouldRecommend: '',
-        editing: false,
-        reviews: [], 
-        // file: null,
-        _id: '',
-        aptFormTitle: '',
-        aptFormDescription: '',
-        aptFormWouldRecommend: '',
       })
     }).then(
       axios.get(`/review/${this.props.match.params._id}`).then(res => {
@@ -115,6 +105,7 @@ class AptDetails extends React.Component {
       apt: this.state.apt._id,
       description: this.state.aptFormDescription,
       wouldRecommend: this.state.aptFormWouldRecommend,
+      file: this.state.file
     };
     axios.post('/api/review', reviewObj, config)
       .then((res)=> {
@@ -124,7 +115,7 @@ class AptDetails extends React.Component {
           aptFormTitle: '',
           aptFormDescription: '',
           aptFormWouldRecommend: '',
-          // file: null
+          file: null
         })
         console.log(res);
       })
@@ -134,22 +125,16 @@ class AptDetails extends React.Component {
 
   }
 
-  // handleChange = (e) => {
-  //   const {name, value} = e.target;
-  //   this.setState({ [name]: value })
-    
-  // }
-
   handleFormChange = (e) => {
     const {name, value} = e.target;
     this.setState({ [name]: value })
   }
 
-  // fileChangedHandler = (event) => {
-  //   const file = event.target.files[0];
-  //   this.setState({ file: file })
-  //   console.log(file);
-  // }
+  fileChangedHandler = (event) => {
+    const file = event.target.files[0];
+    this.setState({ file: file })
+    console.log(file);
+  }
 
   render() {
 
@@ -158,7 +143,7 @@ class AptDetails extends React.Component {
       infinite: true,
       speed: 400,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
     };
     
     let {address, bathrooms, bedrooms} = this.state.apt;
@@ -188,39 +173,34 @@ class AptDetails extends React.Component {
               <h2 id='bath'>{bathrooms} 🛁</h2>
               <h2>{bedrooms} 🛏</h2>
             </div>
-            {this.state.reviews.length > 0 ? <h2>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <div></div>}
-            <div className='slider-div'>
-              <Slider className='slider' {...settings}>
-                <div>
-                  <h3>1</h3>
-                </div>
-                <div>
-                  <h3>2</h3>
-                </div>
-                <div>
-                  <h3>3</h3>
-                </div>
-                <div>
-                  <h3>4</h3>
-                </div>
-              </Slider>
-            </div>
+            {this.state.reviews.length > 0 ? <h2>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
+            
           {this.props.token ? <>
+          
           <form className='apt-details-form' onSubmit={this.handleSubmit}>
+            <div className='form-inner-div'>
             <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
             <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
             {/* <input type='file' onChange={this.fileChangedHandler} /> */}
-            <h4>Recommend this apartment?</h4>
-            <div style={{display: 'flex'}}>
-              <h4 style={{marginRight: '5px'}}>Yes</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='true' style={{marginRight: '5px'}}/>
-              <h4 style={{marginRight: '5px'}}>No</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='false' />
+            <div className='recommend-form'>
+              <h4>Recommend this apartment?</h4>
+              <div style={{display: 'flex', marginLeft: '10px'}}>
+                <h4 style={{marginRight: '5px'}}>Yes</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='true' style={{marginRight: '5px'}}/>
+                <h4 style={{marginRight: '5px'}}>No</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='false' />
+              </div>
             </div>
             <button id='apt-details-btn'>Post Review</button>
+            </div>
           </form>
         </>
         :
-        <Link to='/auth'><h3 id='no-form'>Login to leave a review!</h3></Link>
-        }</div>
+          <div className='apt-details-form-nouser'>
+            <h3>Login to leave a review!</h3>
+            <Link to='/auth'><button id='login-leave-review'>Login</button></Link>
+          </div>
+        }
+        
+        </div>
         
         <div className='details-review-wrapper'>
           {this.state.reviews.length > 0 ? <>

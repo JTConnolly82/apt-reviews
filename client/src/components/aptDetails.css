@@ -10,10 +10,14 @@
   flex-direction: column;
   overflow: hidden;
   height: 90vh;
+  width: 57vw;
 }
 
 .scroll-reviews {
   overflow-y: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 20px;
 }
 
 .apt-details-wrapper h1 {
@@ -30,26 +34,100 @@
   justify-self: flex-end;
 }
 
-.apt-details-form {
+.form-inner-div {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-around;
-  height: 230px;
-  width: 470px;
-  padding: 10px;
+  justify-content: space-evenly;
+  background-color: #eeeeee;
+  width: 40%;
+  height: 35%;
+  padding: 15px;
+  border-radius: 8px;
   position: absolute;
   bottom: 0;
   margin-bottom: 20px;
-  
+  -webkit-box-shadow: 0 1px 1px rgba(101, 101, 101,0.19), 
+  0 2px 2px rgba(101, 101, 101,0.16), 
+  0 4px 4px rgba(101, 101, 101,0.13), 
+  0 8px 8px rgba(101, 101, 101,0.10);
+box-shadow: 0 1px 1px rgba(101, 101, 101,0.19), 
+0 2px 2px rgba(101, 101, 101,0.16), 
+0 4px 4px rgba(101, 101, 101,0.13), 
+0 8px 8px rgba(101, 101, 101,0.10);
+cursor: pointer;
+}
+
+/* .pic-slider {
+  width: 92%;
+  height: 80%;
+  background-color: #ffffff;
+
+}
+
+.slider-wrap {
+  width: 41.5vw;
+  height: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeeee;
+  border-radius: 8px;
+  margin-top: 25px;
+} */
+
+.apt-details-form-nouser {
+  height: 400px;
+  width: 40%;
+  padding: 10px;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0 1px 1px rgba(101, 101, 101,0.19), 
+  0 2px 2px rgba(101, 101, 101,0.16), 
+  0 4px 4px rgba(101, 101, 101,0.13), 
+  0 8px 8px rgba(101, 101, 101,0.10);
+box-shadow: 0 1px 1px rgba(101, 101, 101,0.19), 
+0 2px 2px rgba(101, 101, 101,0.16), 
+0 4px 4px rgba(101, 101, 101,0.13), 
+0 8px 8px rgba(101, 101, 101,0.10);
+
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* 
+.slider-form-div {
+  display: grid;
+  grid-template-rows: 22fr 1fr;
+  height: 80vh;
+} */
+
+#login-leave-review {
+  margin-top: 15px;
+  padding: 5px 10px 5px 10px;
+  color: rgb(68, 68, 68);
+  border: 1px solid rgb(68, 68, 68);
+  border-radius: 3px;
+  font-size: 12px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.recommend-form {
+  margin-top: 15px;
+  padding: 5px;
+  width: 365px;
+  display: flex;
 }
 
 #title-input {
   background: none;
   border: none;
   font-size: 15px;
-  width: 100%;
-  background-color: #f5f5f5;
+  width: 90%;
+  background-color: #ffffff;
   height: 30px;
   border-radius: 8px;
   padding: 4px;
@@ -59,11 +137,11 @@
   background: none;
   border: none;
   font-size: 15px;
-  width: 100%;
+  width: 90%;
   height: 85px;
   margin-top: 27px;
   resize: none;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   margin-bottom: 10px;
   border-radius: 8px;
   padding: 4px; 
@@ -84,11 +162,26 @@
   margin-top: 20px;
   padding: 5px;
   color: black;
-  border: 1px solid black;
   border-radius: 7px;
   font-size: 12px;
   cursor: pointer;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
+  border: none;
+  -webkit-box-shadow: 0 1px 1px rgba(101, 101, 101,0.25), 
+                      0 2px 2px rgba(101, 101, 101,0.22), 
+                      0 4px 4px rgba(101, 101, 101,0.19), 
+                      0 8px 8px rgba(101, 101, 101,0.16);
+  box-shadow: 0 1px 1px rgba(101, 101, 101, 0.25), 
+            0 2px 2px rgba(101, 101, 101,0.22), 
+            0 4px 4px rgba(101, 101, 101,0.19), 
+            0 8px 8px rgba(101, 101, 101,0.16);
+}
+
+#apt-details-btn:hover {
+  -webkit-box-shadow: 0 7px 7px -5px rgba(50,50,93,.25),0 5px 9px -5px rgba(0,0,0,.3),0 -6px 16px -6px rgba(0,0,0,.025);
+  box-shadow: 0 6px 9px -3px rgba(50,50,93,.25),0 4px  8px -5px rgba(0,0,0,.3),0 -6px 16px -6px rgba(0,0,0,.025);
+  -webkit-box-shadow: 0 4px 7px rgba(50,50,93,.1),0 2px 3px rgba(0,0,0,.08);
+  box-shadow: 0 7px 9px rgba(0,0,0,);
 }
 
 #no-form {
@@ -96,16 +189,4 @@
   bottom: 0;
   margin-bottom: 70px;
   font-size: 30px;
-}
-
-
-.slider {
-  height: 100%;
-  width: 100%;
-}
-
-.slider-div {
-  width: 550px;
-  height: 220px;
-  border: 1px solid black;
 }

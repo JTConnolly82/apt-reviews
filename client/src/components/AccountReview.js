@@ -1,20 +1,36 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './accountreview.css';
+import axios from 'axios';
 
-const AccountReview = (props) => {
+class AccountReview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      address: '',
 
-    console.log(props)
+    }
+  }
+
+  componentDidMount() {
+    axios.get('/apartment/' + this.props.apt).then((res) => {
+      this.setState({
+        address: res.data.address
+      })
+    })
+  }
+
+    render() {
     return (
-      <Link to={'/apartment/' + props.apt}>
+      <Link to={'/apartment/' + this.props.apt}>
       <div className='apt-review-wrapper'>
           <div className='title-div'>
-            {/* want this to be the apt address */}
-            <h3>{props.title}</h3>
+            <h2>{this.state.address}</h2>
+            <h3>{this.props.title}</h3>
           </div>
           <div id='wrapper'>
             <div id='scroller'>
-              <h4>{props.description}</h4>
+              <h4>{this.props.description}</h4>
             </div>
           </div>
           <div>
@@ -23,7 +39,7 @@ const AccountReview = (props) => {
       </div>
       </Link>
     )
-  
+    }
 
 
 

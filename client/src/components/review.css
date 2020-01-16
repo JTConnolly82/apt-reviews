@@ -4,17 +4,13 @@
   border-radius: 5px;
   padding: 11px;
   margin: 14px;
-  width: 52vw;
+  width: 50vw;
   -moz-box-shadow:    1px 1px 2px 2px rgb(238, 238, 238);
   -webkit-box-shadow: 1px 1px 2px 2px rgb(238, 238, 238);
   box-shadow:         1px 1px 2px 2px rgb(238, 238, 238);
   display: flex;
-  justify-content: space-between;
   background-color: #ffffff;
-}
-
-.review-info {
-  
+  justify-content: space-between;
 }
 
 #delete {

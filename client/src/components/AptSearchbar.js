@@ -38,8 +38,9 @@ class AptSearchbar extends React.Component {
       .catch(err => console.error(err));
   }
 
-  handleClick = () => {
-    alert('alerts r kool')
+
+  selectStyles = {
+    cursor: 'text'
   }
 
   noOptions = () => {
@@ -99,9 +100,10 @@ class AptSearchbar extends React.Component {
                   isClearable={true} 
                   isSearchable={true}  
                   options={this.state.searchbarApts} 
-                  placeholder='search'
+                  placeholder='Search'
                   onChange={this.handleChange}
                   onRemove={this.handleRemove}
+                  style={this.selectStyles}
                    />
           {this.state.selectedApt ? 
             <Link to={`/apartment/${this.state.selectedApt}`} id='search-button'><img id='search-png' src={process.env.PUBLIC_URL + '/search.png'} /></Link>
