@@ -13,20 +13,12 @@ class Account extends React.Component {
     }
   }
 
-  // let {_id} = this.props.match.params
-  //   axios.get(`/apartment/${_id}`).then(res => {
-  //     console.log('found apt')
-  //     console.log(res.data)
-  //     this.setState({
-  //       apt: res.data
-  //     })
-  //   })
+  
 
   componentDidMount() {
     let theUser = this.props.user._id;
     axios.get(`/user/${theUser}`).then(res => {
       let {name} = res.data[0]
-      console.log(name)
       this.setState({
         user: name
       })
@@ -35,14 +27,12 @@ class Account extends React.Component {
       let theReviews = res.data.filter(review => {
         return review.user === this.props.user._id
       })
-      console.log(theReviews)
       this.setState({
         userReviews: theReviews
       })
     }))
   }
   render() {
-    console.log(this.props);
     let mappedAccountReviews = this.state.userReviews.map(review => {
       return <AccountReview key={Math.random()*1000}
                      title={review.title} 

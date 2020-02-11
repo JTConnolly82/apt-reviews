@@ -67,12 +67,10 @@ class AptSearchbar extends React.Component {
       selectedApt: ''
     })
     if (e != null) {
-      console.log(e.label);
       let selection = e.label;
       let filteredApts = this.state.apts.filter((apt) => {
         return apt.address === selection;
       })
-      console.log(filteredApts)
       this.setState({
         selectedApt: filteredApts[0]._id
       })
@@ -81,7 +79,7 @@ class AptSearchbar extends React.Component {
 
   searchApts = (e) => {
     e.preventDefault();
-    console.log(`searching ${this.state.selectedApt}`)
+    
   }
 
   handleRemove = (e) => {

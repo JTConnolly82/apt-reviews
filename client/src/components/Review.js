@@ -47,15 +47,6 @@ class Review extends React.Component {
     this.props.handleDelete(this.props._id);
   };
 
-  componentDidMount() {
-    // console.log('mounted')
-    // axios.get('/user/' + this.props.userId).then((res) => {
-    //   let theUser = res.data[0].name
-    //   this.setState({
-    //     user: theUser
-    //   })
-    // })
-  }
 
   render() {
     return (

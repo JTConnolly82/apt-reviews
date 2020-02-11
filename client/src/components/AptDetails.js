@@ -38,8 +38,7 @@ class AptDetails extends React.Component {
       })
     }).then(
       axios.get(`/review/${this.props.match.params._id}`).then(res => {
-        console.log('get to review/apt')
-        console.log(res.data)
+        
         let aptReviews = res.data
         this.setState({
           reviews: aptReviews.reverse()
@@ -66,7 +65,6 @@ class AptDetails extends React.Component {
       .catch((err)=> {
         console.dir(err)
       })
-      console.log('handle edit finished in aptdetails')
   }
 
   handleDelete = (reviewId) => {
@@ -117,7 +115,6 @@ class AptDetails extends React.Component {
           aptFormWouldRecommend: '',
           file: null
         })
-        console.log(res);
       })
       .catch((err)=> {
         console.dir(err)
@@ -133,7 +130,7 @@ class AptDetails extends React.Component {
   fileChangedHandler = (event) => {
     const file = event.target.files[0];
     this.setState({ file: file })
-    console.log(file);
+    
   }
 
   render() {
