@@ -1,5 +1,6 @@
 import React from 'react';
 import {Switch, Route, Redirect} from 'react-router-dom';
+
 import Home from './components/Home';
 import AuthIndex from './components/Auth/AuthIndex';
 import Nav from './components/Nav';
@@ -8,6 +9,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Account from './components/Account'
 import apartmentForm from './components/apartmentForm';
 import AptDetails from './components/AptDetails';
+import Footer from './components/Footer';
+
 import './App.css';
 
 
@@ -41,6 +44,7 @@ class App extends React.Component {
           <Route path='/apartment/:_id' component={AptDetails} />
           <Route path='/account/:_id' component={Account} />
         </Switch>
+        {/* <Footer /> */}
       </div>
     )
   }

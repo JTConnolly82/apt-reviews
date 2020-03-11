@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "client", "build")))
 
 
 mongoose.set('useCreateIndex', true);
-mongoose.connect(process.env.MONGODB_URI,
+mongoose.connect(process.env.MONGODB_URI || process.env.DEVELOPMENT_ATLAS,
   {
     useNewUrlParser: true, 
     useUnifiedTopology: true,
@@ -26,12 +26,6 @@ mongoose.connect(process.env.MONGODB_URI,
   })
 .then(()=> console.log("Connected to DB"))
 .catch(err => console.error(err));
-
-
-
-
-
-
  //gatekeeper checks token on requests to /api, 
  //if theres a token it'll create req.user obj
  //if theres not a token, it'll throw "UnauthorizedError"

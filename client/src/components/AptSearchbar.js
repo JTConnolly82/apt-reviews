@@ -40,7 +40,7 @@ class AptSearchbar extends React.Component {
 
 
   selectStyles = {
-    cursor: 'text'
+    cursor: 'text',
   }
 
   noOptions = () => {

@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
+
+
 
 .nav-container {
   height: 60px;
-  background-color: #fafafa;
+  background-color: #fbf7ed;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,14 +13,15 @@
 }
 
 .nav-title {
+  color: #004c3f;
   font-size: 40px;
-  border-bottom: 2px solid rgb(58, 58, 58);
+  font-family: 'Open Sans', sans-serif;
 }
 
 .nav-links {
   margin-right: 5px;
-  border-bottom: 1px solid rgb(58, 58, 58);
-  color: rgb(65, 65, 65);
+  border-bottom: 1px solid #004c3f;
+  color: #004c3f;
 }
 .nav-links:hover {
   border-bottom: 1px solid black;
@@ -25,10 +29,11 @@
 }
 
 .log-btn {
+  color: #004c3f;
   padding: 7px 13px 7px 13px;
   background: none;
   border-radius: 3px;
-  border: 1px solid rgb(96, 96, 96);
+  border: 1px solid #004c3f;
   font-size: 15px;
   cursor: pointer;
   margin-left: 22px;
@@ -36,4 +41,22 @@
 .log-btn:hover {
   -webkit-box-shadow: 0 4px 6px rgba(50,50,93,.11),0 1px 3px rgba(84, 84, 84, 0.08);
   box-shadow: 0 1px 3px rgba(93, 93, 96, 0.11),0 1px 3px rgba(84, 84, 84, 0.08);
+}
+
+.nav-options {
+  display: 'flex';
+  align-items: 'center';
+}
+
+@media (max-width: 545px) {
+  .nav-title {
+    font-size: 30px;
+  }
+  .nav-links {
+    margin: 5px;
+  }
+  .log-btn {
+    margin-left: 35px;
+    margin-top: 10px;
+  }
 }
