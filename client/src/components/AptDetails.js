@@ -165,14 +165,15 @@ class AptDetails extends React.Component {
     return (
       <div className='apt-details-wrapper'>
           <div className='apt-details-main'>
+            <div className='apt-details-head'>
             <h1>{address}</h1>
             <div className='bed-bath-div'>
               <h2 id='bath'>{bathrooms} 🛁</h2>
               <h2>{bedrooms} 🛏</h2>
             </div>
             {this.state.reviews.length > 0 ? <h2>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
-            
-          {this.props.token ? <>
+            </div>
+          {this.props.token ?
           
           <form className='apt-details-form' onSubmit={this.handleSubmit}>
             <div className='form-inner-div'>
@@ -189,7 +190,7 @@ class AptDetails extends React.Component {
             <button id='apt-details-btn'>Post Review</button>
             </div>
           </form>
-        </>
+        
         :
           <div className='apt-details-form-nouser'>
             <h3>Login to leave a review!</h3>
