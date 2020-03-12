@@ -3,7 +3,10 @@ const Schema = mongoose.Schema;
 
 
 const aptSchema = new Schema({
-  address: String,
+  street_address: String,
+  apt_number: String,
+  city: String,
+  state: String,
   bedrooms: Number,
   bathrooms: Number
 })

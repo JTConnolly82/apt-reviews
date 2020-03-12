@@ -143,7 +143,7 @@ class AptDetails extends React.Component {
     //   slidesToScroll: 1,
     // };
     
-    let {address, bathrooms, bedrooms} = this.state.apt;
+    let {street_address, apt_number, city, state, bathrooms, bedrooms} = this.state.apt;
     let recommendations = 0;
     let reviewComponents = this.state.reviews.map((review) => {
       review.wouldRecommend && recommendations++;
@@ -166,7 +166,10 @@ class AptDetails extends React.Component {
       <div className='apt-details-wrapper'>
           <div className='apt-details-main'>
             <div className='apt-details-head'>
-            <h1>{address}</h1>
+            <h1>{street_address}</h1>
+            <span style={{display: 'flex'}}>
+              <h3>{`${city} , ${state}`}</h3>
+            </span>
             <hr style={{marginTop: '5px', marginBottom: '5px', maxWidth: '550px'}}/>
             <div className='bed-bath-div'>
               <h2 id='bath'>{bathrooms} 🛁</h2>
@@ -178,7 +181,11 @@ class AptDetails extends React.Component {
         
         </div>
 
-        <Link to={`/review/${this.state.apt._id}`}>Start Your Review</Link>
+        { this.props.token ? 
+          <Link to={`/review/${this.state.apt._id}`} id='leave-review-link'>Start Your Review</Link>
+          :
+          <Link to="/auth" id='leave-review-link'>Login to Start Review</Link>
+        }
         
         <div className='details-review-wrapper'>
           {this.state.reviews.length > 0 ? <>

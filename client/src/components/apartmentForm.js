@@ -9,7 +9,10 @@ class apartmentForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      address: '',
+      street_address: '',
+      apt_number: '',
+      city: '',
+      state: '',
       bedrooms: '',
       bathrooms: '',
       submitted: false,
@@ -54,7 +57,10 @@ class apartmentForm extends React.Component {
       <div className='apt-form-wrapper'>
         <h1>Add an Apartment</h1>
         <form className='apt-form' onSubmit={this.handleSubmit}>
-          <input className='apt-inputs' onChange={this.handleChange} name='address' placeholder='address' />
+          <input className='apt-inputs' onChange={this.handleChange} name='street_address' placeholder='street address' />
+          <input className='apt-inputs' onChange={this.handleChange} name='apt_number' placeholder='apartment number' />
+          <input className='apt-inputs' onChange={this.handleChange} name='city' placeholder='city' />
+          <input className='apt-inputs' onChange={this.handleChange} name='state' placeholder='state' />
           <input className='apt-inputs' onChange={this.handleChange} name='bedrooms' placeholder='bedrooms' />
           <input className='apt-inputs' onChange={this.handleChange} name='bathrooms' placeholder='bathrooms' />
           <button>Submit</button>
