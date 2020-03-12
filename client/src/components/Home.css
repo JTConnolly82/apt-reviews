@@ -26,6 +26,16 @@ body {
   font-weight: 300;
 }
 
+.home-hero h3 {
+  font-family: 'Open Sans', sans-serif;
+  
+  margin-top: 20px;
+  color: #906509;
+  font-weight: 200;
+  max-width: 500px;
+  text-align: center;
+}
+
 .home-content {
   display: flex;
   flex-direction: column;

@@ -1,17 +1,14 @@
 
 
 .review-container {
-  border-radius: 5px;
-  padding: 11px;
+  padding: 10px;
   margin: 14px;
   width: 50vw;
-  -moz-box-shadow:    1px 1px 2px 2px rgb(238, 238, 238);
-  -webkit-box-shadow: 1px 1px 2px 2px rgb(238, 238, 238);
-  box-shadow:         1px 1px 2px 2px rgb(238, 238, 238);
   display: flex;
-  background-color: #effcfa;
+  background-color: #ffffff;
   justify-content: space-between;
   min-width: 350px;
+  border-bottom: 1px solid rgb(164, 164, 164);
 }
 
 #delete {
@@ -92,28 +89,32 @@ padding: 6px;
 
 #edit-submit {
   padding: 5px;
-  color: rgb(68, 68, 68);
-  border: 1px solid rgb(68, 68, 68);
+  color: #ffffff;
+  border: 1px solid#006c51;
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: .5px;
   border-radius: 3px;
   font-size: 12px;
-  background-color: #ffffff;
+  background-color: #008060;
   cursor: pointer
 }
-#edit-submit:hover {
-  color: rgb(64, 184, 64);
-  border: 1px solid rgb(73, 201, 73);
-}
+
 
 #edit-cancel {
   padding: 5px;
-  color: rgb(68, 68, 68);
-  border: 1px solid rgb(68, 68, 68);
+  color: #ffffff;
+  font-weight: 700;
+  letter-spacing: .5px;
+  border: 1px solid rgb(215, 122, 101);
   border-radius: 3px;
   font-size: 12px;
-  background-color: #ffffff;
+  background-color: rgb(252, 143, 118);
   cursor: pointer
 }
-#edit-cancel:hover {
-  color: rgb(252, 128, 100);
-  border: 1px solid rgb(252, 150, 127);
+
+@media (max-width: 545px) {
+  .review-container {
+    width: 85vw;
+  }
 }

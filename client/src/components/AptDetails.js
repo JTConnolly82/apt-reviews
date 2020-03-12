@@ -167,6 +167,7 @@ class AptDetails extends React.Component {
           <div className='apt-details-main'>
             <div className='apt-details-head'>
             <h1>{address}</h1>
+            <hr style={{marginTop: '5px', marginBottom: '5px', maxWidth: '550px'}}/>
             <div className='bed-bath-div'>
               <h2 id='bath'>{bathrooms} 🛁</h2>
               <h2>{bedrooms} 🛏</h2>

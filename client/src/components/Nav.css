@@ -30,10 +30,10 @@
 
 .log-btn {
   color: #004c3f;
+  background-color: #effcfa;
   padding: 7px 13px 7px 13px;
-  background: none;
   border-radius: 3px;
-  border: 1px solid #004c3f;
+  border: 1px solid #b8c4c2;
   font-size: 15px;
   cursor: pointer;
   margin-left: 22px;
