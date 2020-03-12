@@ -32,7 +32,7 @@ button:hover {
 }
 
 #edit {
-  margin-top: 20px;
+  margin-top: 5px;
   padding: 5px;
   color: rgb(68, 68, 68);
   border: 1px solid rgb(68, 68, 68);
@@ -50,6 +50,7 @@ button:hover {
 display: flex;
 flex-direction: column;
 justify-content: center;
+align-self: center;
 padding: 6px;
 }
 

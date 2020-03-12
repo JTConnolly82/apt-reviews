@@ -158,6 +158,7 @@ class AptDetails extends React.Component {
                      _id={review._id}
                      userId={review.user}
                      userName={review.userName}
+                     {...review}
                      />
     })
 

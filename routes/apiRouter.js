@@ -41,6 +41,7 @@ apiRouter.post('/',  (req, res, next) => {
       res.status(500);
       return next(err);
     }
+    console.log(savedReview.createdAt);
     return res.status(201).send(savedReview);
   })
 })
@@ -56,6 +57,7 @@ apiRouter.put('/', (req, res, next) => {
       res.status(500)
       return next(err)
     }
+    console.log(updatedReview.updatedAt)
     return res.send(updatedReview)
   })
 })

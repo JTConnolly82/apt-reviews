@@ -49,6 +49,17 @@ class Review extends React.Component {
 
 
   render() {
+
+    let dateCreated = new Date(this.props.createdAt).toDateString();
+    let dateUpdated = new Date(this.props.updatedAt).toDateString();
+    let displayedDate;
+    
+    if (this.props.createdAt !== this.props.updatedAt) {
+      displayedDate = `Updated ${dateUpdated}`
+    } else {
+      displayedDate = `Created ${dateCreated}`
+    }
+
     return (
      <> { this.state.editing ? 
       
@@ -68,12 +79,15 @@ class Review extends React.Component {
       : <div className='review-container'>
           <div className='review-info'>
             <h3>👤 {this.props.userName}</h3>
-            {/* <h4>Recommends  { this.props.wouldRecommend ? '👍' : '👎' }</h4> */}
-            <span style={{display: 'flex', alignItems: 'center'}}><h3 style={{marginRight: '4px'}}>{ this.props.wouldRecommend ? '👍' : '👎' }</h3><h2>{this.props.title}</h2></span>
+            <h5 style={{color: 'grey'}}>{displayedDate}</h5>
+            <span style={{display: 'flex', alignItems: 'center', marginBottom: '25px', marginTop: '10px'}}>
+              <h4 style={{marginRight: '4px'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
+            </span>
+            <h2>{this.props.title}</h2>
             <h3>{this.props.description}</h3>
           </div>
           <div className='review-buttons'>
-            {this.props.user._id === this.props.userId && <>
+            {this.props.user._id === this.props.user._id && <>
             <button id='delete' onClick={this.handleDeletePass}>Delete</button>
             <button id='edit' onClick={this.handleEditToggle}>Edit</button>
               </>
