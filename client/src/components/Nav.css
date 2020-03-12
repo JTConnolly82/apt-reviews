@@ -4,28 +4,34 @@
 
 .nav-container {
   height: 60px;
-  background-color: #fbf7ed;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid rgb(240, 240, 240);
+  padding: 10px 0;
 }
 
 .nav-title {
   color: #004c3f;
   font-size: 40px;
+  padding: 5px;
   font-family: 'Open Sans', sans-serif;
 }
 
 .nav-links {
-  margin-right: 5px;
-  border-bottom: 1px solid #004c3f;
-  color: #004c3f;
+  color: #00221d;
+  /* background-color: #effcfa;
+  padding: 7px 13px 7px 13px;
+  border-radius: 3px;
+  border: 1px solid #b8c4c2;
+  font-size: 15px;
+  cursor: pointer;
+  margin-left: 22px; */
+  transition: .5s; 
 }
 .nav-links:hover {
-  border-bottom: 1px solid black;
-  color: black;
+  transition: ease-in;
+  border-bottom: 1px solid #00221d;
 }
 
 .log-btn {

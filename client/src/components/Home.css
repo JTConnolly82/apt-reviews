@@ -67,7 +67,7 @@ body {
   border-radius: 31% 69% 38% 62% / 38% 42% 58% 62%;
   width: 330px;
   height: 270px;
-  background-color: rgb(218, 218, 218);
+  background-color: #cdebe7;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +78,7 @@ body {
   border-radius: 75% 25% 70% 30% / 30% 30% 70% 70%;
   width: 330px;
   height: 270px;
-  background-color: rgb(218, 218, 218);
+  background-color: #cdebe7;;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -93,7 +93,7 @@ body {
   border-radius: 61% 39% 57% 43% / 40% 23% 77% 60%;
   width: 330px;
   height: 270px;
-  background-color: rgb(218, 218, 218);
+  background-color: #cdebe7;
   display: flex;
   justify-content: center;
   align-items: center;

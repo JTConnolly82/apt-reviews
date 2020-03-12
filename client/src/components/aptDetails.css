@@ -3,38 +3,39 @@
 .apt-details-wrapper {
   display: flex;
   justify-content: space-between;
-  width: 100vw;
   background-color: #ffffff;
 }
 
 .details-review-wrapper {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   height: 90vh;
-  width: 57vw;
+  width: 56vw;
   justify-content: space-between;
+  align-items: center;
+}
+
+.no-review-text {
+  margin-top: 150px;
+  padding: 20px;
 }
 
 .scroll-reviews {
-  overflow-y: auto;
   margin-top: 30px;
   margin-bottom: 5px;
+  overflow-x: hidden;
 }
 
 .apt-details-wrapper h1 {
   font-size: 50px;
 }
 
-.apt-details-head {
-  
-}
-
 .apt-details-main {
-  padding: 5px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 42vw;
 }
 
 .leave-review {
@@ -45,13 +46,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-evenly;
-  background-color: #fbf7ed;
-  width: 500px;
-  min-width: 350px;
-  height: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
+  background-color: #dff7e5;
+  max-width: 780px;
+  width: 780px;
+  min-width: 370px;
+  height: 300px;
+  padding: 15px;
   -webkit-box-shadow: 0 1px 1px rgba(101, 101, 101,0.19), 
   0 2px 2px rgba(101, 101, 101,0.16), 
   0 4px 4px rgba(101, 101, 101,0.13), 
@@ -60,7 +60,6 @@ box-shadow: 0 1px 1px rgba(101, 101, 101,0.19),
 0 2px 2px rgba(101, 101, 101,0.16), 
 0 4px 4px rgba(101, 101, 101,0.13), 
 0 8px 8px rgba(101, 101, 101,0.10);
-cursor: pointer;
 }
 
 /* .pic-slider {
@@ -131,7 +130,7 @@ box-shadow: 0 1px 1px rgba(101, 101, 101,0.19),
   background: none;
   border: none;
   font-size: 15px;
-  width: 90%;
+  width: 100%;
   background-color: #ffffff;
   height: 30px;
   border-radius: 8px;
@@ -142,8 +141,8 @@ box-shadow: 0 1px 1px rgba(101, 101, 101,0.19),
   background: none;
   border: none;
   font-size: 15px;
-  width: 90%;
-  height: 85px;
+  width: 100%;
+  height: 90px;
   margin-top: 27px;
   resize: none;
   background-color: #ffffff;
@@ -207,13 +206,16 @@ hr {
   .apt-details-wrapper {
     flex-direction: column;
   }
+  .apt-details-form {
+    width: 90vw;
+  }
   .details-review-wrapper {
     width: 100%;
   }
   .scroll-reviews {
     margin: 5px;
-    overflow-y: visible
-    
+    overflow-y: visible;
+    overflow-x: visible;
   }
   hr {
     width: 355px;
@@ -223,5 +225,9 @@ hr {
 @media (max-width: 545px) {
   .form-inner-div {
     width: 85vw;
+  }
+  .no-review-text {
+    font-size: 18px;
+    text-align: center;
   }
 }

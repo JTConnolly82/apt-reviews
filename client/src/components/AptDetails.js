@@ -172,7 +172,7 @@ class AptDetails extends React.Component {
               <h2 id='bath'>{bathrooms} 🛁</h2>
               <h2>{bedrooms} 🛏</h2>
             </div>
-            {this.state.reviews.length > 0 ? <h2>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
+            {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px'}}>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
             </div>
           {this.props.token ?
           
@@ -208,7 +208,10 @@ class AptDetails extends React.Component {
                         </div>
                                            </> 
                         : 
-                        <h2 style={{marginRight: '200px', marginTop: '150px'}}>Be the first to leave a review! </h2>
+                        <div>
+                        <h2 className='no-review-text'>Leave the first review for this location!</h2>
+                        {/* <img style={{maxWidth: '540px'}} src='https://image.freepik.com/free-vector/login-concept-illustration_114360-757.jpg' /> */}
+                        </div>
                         }
         </div>
       </div>

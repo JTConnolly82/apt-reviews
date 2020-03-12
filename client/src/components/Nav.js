@@ -10,9 +10,9 @@ class Nav extends React.Component {
       <div className='nav-container'>
         <Link to='/'><h1 className='nav-title'>Apt Reviews</h1></Link>
         <div className='nav-options'>
-          <Link to='/apartment' className='nav-links'>Add Apt</Link>
+          {/* <Link to='/apartment' className='nav-links'>Add Apt</Link> */}
           {!this.props.token && <Link to="/auth" className='nav-links'>Login/Signup</Link>}
-          { this.props.token && <><Link to={`/account/${this.props.user._id}`} className='nav-links'>Account</Link><button className='log-btn' onClick={this.props.logout}>Logout</button></>}
+          { this.props.token && <><Link to={`/account/${this.props.user._id}`} className='nav-links'>My Account</Link><button className='log-btn' onClick={this.props.logout}>Logout</button></>}
         </div>
       </div>
     )

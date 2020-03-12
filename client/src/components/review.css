@@ -89,28 +89,35 @@ padding: 6px;
 
 #edit-submit {
   padding: 5px;
-  color: #ffffff;
   border: 1px solid#006c51;
-  color: #ffffff;
-  font-weight: 700;
   letter-spacing: .5px;
   border-radius: 3px;
   font-size: 12px;
-  background-color: #008060;
+  background-color: #ffffff;
   cursor: pointer
 }
 
 
 #edit-cancel {
   padding: 5px;
-  color: #ffffff;
-  font-weight: 700;
   letter-spacing: .5px;
   border: 1px solid rgb(215, 122, 101);
   border-radius: 3px;
   font-size: 12px;
-  background-color: rgb(252, 143, 118);
+  background-color: #ffffff;
   cursor: pointer
+}
+
+@media (max-width: 1680) {
+  .review-container {
+    width: 600px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .review-container {
+    width: 85vw;
+  }
 }
 
 @media (max-width: 545px) {
