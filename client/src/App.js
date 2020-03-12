@@ -12,6 +12,7 @@ import AptDetails from './components/AptDetails';
 import Footer from './components/Footer';
 
 import './App.css';
+import ReviewPage from './components/ReviewPage';
 
 
 
@@ -37,6 +38,14 @@ class App extends React.Component {
             token={token}
             exact path='/apartment'
             component={apartmentForm}
+            redirectTo="/auth"
+            user={user}
+            addReview={addReview}
+          />
+          <ProtectedRoute 
+            token={token}
+            exact path='/review/:_id'
+            component={ReviewPage}
             redirectTo="/auth"
             user={user}
             addReview={addReview}
