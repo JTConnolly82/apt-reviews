@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
-import {withUser} from '../context/UserProvider';
+import { withUser } from '../context/UserProvider';
 import Review from './Review';
 import './aptDetails.css';
-import {Link} from 'react-router-dom';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Link } from 'react-router-dom';
+// import Slider from "react-slick";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -135,13 +135,13 @@ class AptDetails extends React.Component {
 
   render() {
 
-    const settings = {
-      dots: true,
-      infinite: true,
-      speed: 400,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    };
+    // const settings = {
+    //   dots: true,
+    //   infinite: true,
+    //   speed: 400,
+    //   slidesToShow: 1,
+    //   slidesToScroll: 1,
+    // };
     
     let {address, bathrooms, bedrooms} = this.state.apt;
     let recommendations = 0;
@@ -174,32 +174,11 @@ class AptDetails extends React.Component {
             </div>
             {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px'}}>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
             </div>
-          {this.props.token ?
           
-          <form className='apt-details-form' onSubmit={this.handleSubmit}>
-            <div className='form-inner-div'>
-            <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
-            <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
-            {/* <input type='file' onChange={this.fileChangedHandler} /> */}
-            <div className='recommend-form'>
-              <h4>Recommend this apartment?</h4>
-              <div style={{display: 'flex', marginLeft: '10px'}}>
-                <h4 style={{marginRight: '5px'}}>Yes</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='true' style={{marginRight: '5px'}}/>
-                <h4 style={{marginRight: '5px'}}>No</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='false' />
-              </div>
-            </div>
-            <button id='apt-details-btn'>Post Review</button>
-            </div>
-          </form>
-        
-        :
-          <div className='apt-details-form-nouser'>
-            <h3>Login to leave a review!</h3>
-            <Link to='/auth'><button id='login-leave-review'>Login</button></Link>
-          </div>
-        }
         
         </div>
+
+        <Link to={`/review/${this.state.apt._id}`}>Start Your Review</Link>
         
         <div className='details-review-wrapper'>
           {this.state.reviews.length > 0 ? <>
