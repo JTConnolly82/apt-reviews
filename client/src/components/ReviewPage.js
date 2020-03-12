@@ -71,25 +71,29 @@ class ReviewPage extends React.Component {
   }
 
   render() {
+
+    let aptNum = this.state.apt.apt_number;
+    let stAddress = this.state.apt.street_address;
+
     return (
-          
-        <form className='apt-details-form' onSubmit={this.handleSubmit}>
-          <div className='form-inner-div'>
-          <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
-          <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
-          {/* <input type='file' onChange={this.fileChangedHandler} /> */}
-          <div className='recommend-form'>
-            <h4>Recommend this apartment?</h4>
-            <div style={{display: 'flex', marginLeft: '10px'}}>
-              <h4 style={{marginRight: '5px'}}>Yes</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='true' style={{marginRight: '5px'}}/>
-              <h4 style={{marginRight: '5px'}}>No</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='false' />
+        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}>
+          <h2>{`Leave your review ${stAddress ? "for " + stAddress : ''} ${aptNum ? aptNum : ''} below 🏘`}</h2>
+          <form className='apt-details-form' onSubmit={this.handleSubmit}>
+            <div className='form-inner-div'>
+            <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
+            <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
+            {/* <input type='file' onChange={this.fileChangedHandler} /> */}
+            <div className='recommend-form'>
+              <h4>Recommend this apartment?</h4>
+              <div style={{display: 'flex', marginLeft: '10px'}}>
+                <h4 style={{marginRight: '5px'}}>Yes</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='true' style={{marginRight: '5px'}}/>
+                <h4 style={{marginRight: '5px'}}>No</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='false' />
+              </div>
             </div>
-          </div>
-          <button id='apt-details-btn'>Post Review</button>
-          </div>
-        </form>
-      
-      
+            <button id='apt-details-btn'>Post Review</button>
+            </div>
+          </form>
+        </div>
     )
   }
 }
