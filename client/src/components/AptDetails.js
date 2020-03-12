@@ -166,7 +166,7 @@ class AptDetails extends React.Component {
       <div className='apt-details-wrapper'>
           <div className='apt-details-main'>
             <div className='apt-details-head'>
-            <h1>{`${street_address} ${apt_number}`}</h1>
+            <h1>{`${street_address} ${apt_number && apt_number}`}</h1>
             <span style={{display: 'flex'}}>
               <h3>{`${city} , ${state}`}</h3>
             </span>
