@@ -29,7 +29,7 @@ class AptSearchbar extends React.Component {
           apts: newApts
         })
         let stagedSearchApts = this.state.apts.map((apt) => {
-          return {value: apt._id, label: apt.address}
+          return {value: apt._id, label: apt.street_address + " " + apt.apt_number}
         });
         this.setState({
           searchbarApts: stagedSearchApts
@@ -69,7 +69,7 @@ class AptSearchbar extends React.Component {
     if (e != null) {
       let selection = e.label;
       let filteredApts = this.state.apts.filter((apt) => {
-        return apt.address === selection;
+        return selection.includes(apt.street_address) && selection.includes(apt.apt_number);
       })
       this.setState({
         selectedApt: filteredApts[0]._id
