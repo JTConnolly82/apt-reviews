@@ -80,7 +80,7 @@ class Review extends React.Component {
             <h3>👤 {this.props.userName}</h3>
             <h5 style={{color: 'grey'}}>{displayedDate}</h5>
             <span style={{display: 'flex', alignItems: 'center', marginBottom: '25px', marginTop: '10px'}}>
-              <h4 style={{marginRight: '4px'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
+              <h4 style={{marginRight: '4px', color: '#42474c;'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
             </span>
             <h2>{this.props.title}</h2>
             <h3>{this.props.description}</h3>

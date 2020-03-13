@@ -5,7 +5,6 @@
   margin: 14px;
   width: 50vw;
   display: flex;
-  background-color: #ffffff;
   justify-content: space-between;
   min-width: 350px;
   border-bottom: 1px solid rgb(164, 164, 164);
@@ -56,10 +55,12 @@ padding: 6px;
 
 .review-container h2 {
   font-size: 29px;
+  color: #42474c;
 }
 
 .review-container h3 {
   font-size: 18px;
+  color: #42474c;
 }
 
 .edit-form button {

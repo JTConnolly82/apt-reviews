@@ -174,7 +174,7 @@ class AptDetails extends React.Component {
             <hr style={{marginTop: '5px', marginBottom: '5px', maxWidth: '550px'}}/>
             <div className='bed-bath-div'>
               <h2 id='bath'>{bathrooms} 🛁</h2>
-              <h2>{bedrooms} 🛏</h2>
+              <h2 id='bed'>{bedrooms} 🛏</h2>
             </div>
             {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px'}}>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
             </div>
