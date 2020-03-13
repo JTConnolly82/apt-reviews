@@ -3,13 +3,15 @@
 
 body {
   background-color: #ffffff;
+  margin: 0;
+  padding: 0px 0;
 }
 
 .home-hero {
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 100vw;
+  
   height: 92vh;
   background-position: 30% 15%;
   background-repeat: no-repeat;
