@@ -63,7 +63,7 @@ class apartmentForm extends React.Component {
           <input className='apt-inputs' onChange={this.handleChange} name='state' placeholder='state' />
           <input className='apt-inputs' onChange={this.handleChange} name='bedrooms' placeholder='bedrooms' />
           <input className='apt-inputs' onChange={this.handleChange} name='bathrooms' placeholder='bathrooms' />
-          <button>Submit</button>
+          <button id='form-btn'>Add Apartment</button>
         </form>
       </div>
     )

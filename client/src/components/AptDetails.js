@@ -156,7 +156,7 @@ class AptDetails extends React.Component {
                      description={review.description} 
                      wouldRecommend={review.wouldRecommend}
                      _id={review._id}
-                     userId={review.user}
+                     userId={this.props.user._id}
                      userName={review.userName}
                      {...review}
                      />
@@ -185,7 +185,7 @@ class AptDetails extends React.Component {
         { this.props.token ? 
           <Link to={`/review/${this.state.apt._id}`} id='leave-review-link'>Start Your Review</Link>
           :
-          <Link to="/auth" id='leave-review-link'>Login to Start Review</Link>
+          <Link to="/auth" id='leave-review-link'>Login To Start Review</Link>
         }
         
         <div className='details-review-wrapper'>

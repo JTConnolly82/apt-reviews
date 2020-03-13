@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import {withUser} from '../context/UserProvider';
-import {Redirect} from 'react-router-dom';
 
 
 class ReviewPage extends React.Component {

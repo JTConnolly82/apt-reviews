@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import './review.css'
 import {withUser} from '../context/UserProvider'
 
@@ -87,7 +86,7 @@ class Review extends React.Component {
             <h3>{this.props.description}</h3>
           </div>
           <div className='review-buttons'>
-            {this.props.user._id === this.props.user._id && <>
+            {this.props.userId === this.props.user && <>
             <button id='delete' onClick={this.handleDeletePass}>Delete</button>
             <button id='edit' onClick={this.handleEditToggle}>Edit</button>
               </>
