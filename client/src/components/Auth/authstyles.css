@@ -11,14 +11,14 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
   width: 350px;
   height: auto;
   padding: 40px;
-  border-radius: 5px;
-  border: 1px solid lightgrey;
+  border: 1px solid grey;
+  border-radius: 6px;
 }
 .auth-form input {
+  background-color: inherit;
   line-height: 25px;
   margin-bottom: 5px;
   margin-top: 5px;
@@ -27,6 +27,7 @@
 }
 .auth-form button {
   border: 1px solid grey;
+  background-color: #effcfa;
   border-radius: 4px;
   width: 40%;
   align-self: center;

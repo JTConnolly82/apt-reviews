@@ -22,7 +22,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Review'
   }]
-})
+});
 
 //pre save hook to encrypt pw 
 userSchema.pre("save", function(next) {
@@ -37,10 +37,10 @@ userSchema.pre("save", function(next) {
     //move on to the .save() in the auth/signup route
     next()
   })
-})
+});
 
 //methods
-//compairing the encrypted password to the users password attempts
+//comparing the encrypted password to the users password attempts
 userSchema.methods.checkPassword = function(passwordAttempt, callback) {
   bcrypt.compare(passwordAttempt, this.password, (err, isMatch) => {
     if (err) return callback(err)

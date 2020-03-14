@@ -18,12 +18,11 @@
 }
 
 .no-review-text {
-  margin-top: 150px;
+  margin-top: 80px;
   padding: 20px;
 }
 
 #leave-review-link {
-  margin-top: 30px;
   color: #004c3f;
   background-color: #effcfa;
   padding: 7px 13px 7px 13px;
@@ -32,6 +31,7 @@
   background-color: inherit;
   font-size: 18px;
   cursor: pointer;
+  margin-top: 50px;
 }
 
 #leave-review-link:hover {
@@ -68,6 +68,7 @@ border-color: #008060;
 }
 
 .apt-details-main {
+  margin-top: 50px;
   padding: 10px;
   display: flex;
   flex-direction: column;

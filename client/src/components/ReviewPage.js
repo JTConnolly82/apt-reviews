@@ -17,7 +17,7 @@ class ReviewPage extends React.Component {
       aptFormTitle: '',
       aptFormDescription: '',
       aptFormWouldRecommend: '',
-      file: null
+      // file: null
     }
   }
 
@@ -50,7 +50,7 @@ class ReviewPage extends React.Component {
       apt: this.state.apt._id,
       description: this.state.aptFormDescription,
       wouldRecommend: this.state.aptFormWouldRecommend,
-      file: this.state.file
+      // file: this.state.file
     };
     axios.post('/api/review', reviewObj, config)
       .then((res)=> {
@@ -60,7 +60,7 @@ class ReviewPage extends React.Component {
           aptFormTitle: '',
           aptFormDescription: '',
           aptFormWouldRecommend: '',
-          file: null
+          // file: null
         })
         this.props.history.push("/apartment/" + this.state.apt._id)
       })
