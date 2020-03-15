@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import {withUser} from '../context/UserProvider';
-
+import { withUser } from '../context/UserProvider';
+import './reviewpage.css'
 
 class ReviewPage extends React.Component {
   constructor() {
@@ -17,7 +17,7 @@ class ReviewPage extends React.Component {
       aptFormTitle: '',
       aptFormDescription: '',
       aptFormWouldRecommend: '',
-      // file: null
+      files: []
     }
   }
 
@@ -29,6 +29,35 @@ class ReviewPage extends React.Component {
       })
     })
   }
+
+  fileObj = [];
+  fileArray = []
+
+  uploadMultipleFiles = (e) => {
+    this.fileObj.push(e.target.files)
+        for (let i = 0; i < this.fileObj[0].length; i++) {
+            this.fileArray.push(
+              {
+              url: URL.createObjectURL(this.fileObj[0][i]),
+              description: '',
+              reviewId: this.props.match.params._id
+            })
+        }
+        this.setState({ files: this.fileArray })
+}
+
+handlePicDescriptionChange = (e) => {
+  let { value } = e.target;
+  let copiedState = this.state;
+  for (let i = 0; i < this.state.files.length; i++) {
+    if (copiedState.files[i].url === e.target.previousSibling.src) {
+        copiedState.files[i].description = value;
+    }
+  }
+  this.setState({
+    ...copiedState
+  })
+}
 
   handleFormChange = (e) => {
     const {name, value} = e.target;
@@ -49,9 +78,10 @@ class ReviewPage extends React.Component {
       title: this.state.aptFormTitle,
       apt: this.state.apt._id,
       description: this.state.aptFormDescription,
-      wouldRecommend: this.state.aptFormWouldRecommend,
-      // file: this.state.file
+      wouldRecommend: this.state.aptFormWouldRecommend
     };
+    let reviewImagesObj = this.state.files;
+    console.log(reviewImagesObj)
     axios.post('/api/review', reviewObj, config)
       .then((res)=> {
         let updatedReviews = [res.data, ...this.state.reviews];
@@ -77,11 +107,33 @@ class ReviewPage extends React.Component {
     return (
         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}>
           <h2>{`Leave your review ${stAddress ? "for " + stAddress : ''} ${aptNum ? aptNum : ''} below 🏘`}</h2>
+    
           <form className='apt-details-form' onSubmit={this.handleSubmit}>
             <div className='form-inner-div'>
             <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
             <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
-            {/* <input type='file' onChange={this.fileChangedHandler} /> */}
+            <input name='files' type='file' multiple onChange={this.uploadMultipleFiles} style={{paddingBottom: '20px'}}/>
+            <span style={{ padding: '10px', display: 'flex'}}>
+
+              {
+                this.fileArray.length > 0 ?
+                  (this.fileArray).map(imgObj => (
+                        <div className='pic-input-div' key={imgObj.url}>
+                          <img src={imgObj.url} alt="..." className='preview-image' />
+                          <input placeholder='picture label' 
+                                 type='text' 
+                                 name='pic-description' 
+                                 className='pic-description' 
+                                 onChange={this.handlePicDescriptionChange}
+                          />
+                        </div>
+                      ))
+                
+                :
+                //space placeholder
+                <div style={{height: '100px', width: '100px'}}></div>
+              }  
+            </span>         
             <div className='recommend-form'>
               <h4>Recommend this apartment?</h4>
               <div style={{display: 'flex', marginLeft: '10px'}}>
@@ -92,6 +144,7 @@ class ReviewPage extends React.Component {
             <button id='apt-details-btn'>Post Review</button>
             </div>
           </form>
+
         </div>
     )
   }

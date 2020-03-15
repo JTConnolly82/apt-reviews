@@ -10,13 +10,13 @@ const path = require("path");
 app.use(express.json());
 app.use(morgan('dev'));
 
-
 // ... other app.use middleware 
 app.use(express.static(path.join(__dirname, "client", "build")))
 
 
-
 mongoose.set('useCreateIndex', true);
+
+
 mongoose.connect(process.env.MONGODB_URI || process.env.DEVELOPMENT_ATLAS,
   {
     useNewUrlParser: true, 
@@ -29,9 +29,10 @@ mongoose.connect(process.env.MONGODB_URI || process.env.DEVELOPMENT_ATLAS,
  //gatekeeper checks token on requests to /api, 
  //if theres a token it'll create req.user obj
  //if theres not a token, it'll throw "UnauthorizedError"
+
+
 app.use("/api", expressJwt({secret: process.env.SECRET || "some secret passphrase here for local development"}));
 app.use('/auth', require('./routes/auth'));
-// app.use("/review", require("./routes/review"));
 app.use("/review", require('./routes/review'));
 app.use("/api/review", require('./routes/apiRouter'));
 app.use("/apartment", require('./routes/apartment'));
