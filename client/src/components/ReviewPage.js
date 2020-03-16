@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { withUser } from '../context/UserProvider';
-import './reviewpage.css'
+import './reviewpage.css';
+
+
 
 class ReviewPage extends React.Component {
   constructor() {
@@ -9,15 +11,13 @@ class ReviewPage extends React.Component {
     this.state = {
       apt: {},
       title: '',
-      description: '',
       wouldRecommend: '',
-      editing: false,
       reviews: [], 
       _id: '',
       aptFormTitle: '',
       aptFormDescription: '',
       aptFormWouldRecommend: '',
-      files: []
+      files: null
     }
   }
 
@@ -30,34 +30,44 @@ class ReviewPage extends React.Component {
     })
   }
 
+  // for thumbnails
   fileObj = [];
   fileArray = []
 
+  
   uploadMultipleFiles = (e) => {
     this.fileObj.push(e.target.files)
+    console.log('file object', this.fileObj);
         for (let i = 0; i < this.fileObj[0].length; i++) {
-            this.fileArray.push(
-              {
+            this.fileArray.push({
+              file: this.fileObj[0][i],
               url: URL.createObjectURL(this.fileObj[0][i]),
               description: '',
-              reviewId: this.props.match.params._id
+              reviewId: this.props.match.params
             })
         }
         this.setState({ files: this.fileArray })
-}
 
-handlePicDescriptionChange = (e) => {
-  let { value } = e.target;
-  let copiedState = this.state;
-  for (let i = 0; i < this.state.files.length; i++) {
-    if (copiedState.files[i].url === e.target.previousSibling.src) {
-        copiedState.files[i].description = value;
-    }
+    // let files = e.target.files[0];
+    // this.setState({
+    //   uploadFiles: files
+    // })
   }
-  this.setState({
-    ...copiedState
-  })
-}
+
+
+
+  handlePicDescriptionChange = (e) => {
+    let { value } = e.target;
+    let copiedState = this.state;
+    for (let i = 0; i < this.state.files.length; i++) {
+      if (copiedState.files[i].url === e.target.previousSibling.src) {
+          copiedState.files[i].description = value;
+      }
+    }
+    this.setState({
+      ...copiedState
+    })
+  }
 
   handleFormChange = (e) => {
     const {name, value} = e.target;
@@ -72,31 +82,34 @@ handlePicDescriptionChange = (e) => {
     let config = {
       headers: {'Authorization': "bearer " + this.props.token}
     }
-    // const fd = new FormData();
-    // fd.append('image', this.state.file, this.state.file.name);
+    let files = this.state.files;
+    let formData = new FormData();
+    formData.append('files', files);
+    
+
     let reviewObj = {
       title: this.state.aptFormTitle,
       apt: this.state.apt._id,
       description: this.state.aptFormDescription,
-      wouldRecommend: this.state.aptFormWouldRecommend
+      wouldRecommend: this.state.aptFormWouldRecommend,
+      // files: files
     };
-    let reviewImagesObj = this.state.files;
-    console.log(reviewImagesObj)
-    axios.post('/api/review', reviewObj, config)
-      .then((res)=> {
-        let updatedReviews = [res.data, ...this.state.reviews];
-        this.setState({
-          reviews: updatedReviews,
-          aptFormTitle: '',
-          aptFormDescription: '',
-          aptFormWouldRecommend: '',
-          // file: null
+    
+        axios.post('/api/review', reviewObj, config)
+        .then((res)=> {
+          let updatedReviews = [res.data, ...this.state.reviews];
+          this.setState({
+            reviews: updatedReviews,
+            aptFormTitle: '',
+            aptFormDescription: '',
+            aptFormWouldRecommend: '',
+            files: null
+          })
+          this.props.history.push("/apartment/" + this.state.apt._id)
         })
-        this.props.history.push("/apartment/" + this.state.apt._id)
-      })
-      .catch((err)=> {
-        console.dir(err)
-      })
+        .catch((err)=> {
+          console.dir(err)
+        }) 
   }
 
   render() {
