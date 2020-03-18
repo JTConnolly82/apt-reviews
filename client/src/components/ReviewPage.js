@@ -10,14 +10,14 @@ class ReviewPage extends React.Component {
     super();
     this.state = {
       apt: {},
-      title: '',
       wouldRecommend: '',
       reviews: [], 
       _id: '',
       aptFormTitle: '',
       aptFormDescription: '',
       aptFormWouldRecommend: '',
-      files: null
+      files: [],
+      thumbnailFiles: []
     }
   }
 
@@ -30,42 +30,58 @@ class ReviewPage extends React.Component {
     })
   }
 
-  // for thumbnails
-  fileObj = [];
-  fileArray = []
+  
 
   
-  uploadMultipleFiles = (e) => {
-    this.fileObj.push(e.target.files)
-    console.log('file object', this.fileObj);
-        for (let i = 0; i < this.fileObj[0].length; i++) {
-            this.fileArray.push({
-              file: this.fileObj[0][i],
-              url: URL.createObjectURL(this.fileObj[0][i]),
-              description: '',
-              reviewId: this.props.match.params
-            })
+  // uploadMultipleFiles = (e) => {
+  //   this.fileObj.push(e.target.files)
+  //   console.log('file object', this.fileObj);
+  //       for (let i = 0; i < this.fileObj[0].length; i++) {
+  //           this.fileArray.push(
+  //             this.fileObj[0][i],
+  //             // url: URL.createObjectURL(this.fileObj[0][i]),
+  //             // description: '',
+  //             // reviewId: this.props.match.params
+  //           )
+  //       }
+  //       console.log(this.fileArray[0])
+  //       this.setState({ thumbnailFiles: this.fileArray })
+  // }
+
+
+
+  // handlePicDescriptionChange = (e) => {
+  //   let { value } = e.target;
+  //   let copiedState = this.state;
+  //   for (let i = 0; i < this.state.files.length; i++) {
+  //     if (copiedState.files[i].url === e.target.previousSibling.src) {
+  //         copiedState.files[i].description = value;
+  //     }
+  //   }
+  //   this.setState({
+  //     ...copiedState
+  //   })
+  // }
+
+  handleFiles = (e) => {
+
+  
+    let thumbnailStagingArray = [];
+        for (let i = 0; i < e.target.files.length; i++) {
+            thumbnailStagingArray.push(
+              {url: URL.createObjectURL(e.target.files[i])}
+              // description: '',
+              // reviewId: this.props.match.params
+            )
         }
-        this.setState({ files: this.fileArray })
-
-    // let files = e.target.files[0];
-    // this.setState({
-    //   uploadFiles: files
-    // })
-  }
+        
+        this.setState({ thumbnailFiles: thumbnailStagingArray })
 
 
-
-  handlePicDescriptionChange = (e) => {
-    let { value } = e.target;
-    let copiedState = this.state;
-    for (let i = 0; i < this.state.files.length; i++) {
-      if (copiedState.files[i].url === e.target.previousSibling.src) {
-          copiedState.files[i].description = value;
-      }
-    }
+    let fileArr = [];
+    fileArr.push(e.target.files)
     this.setState({
-      ...copiedState
+      files: [...fileArr]
     })
   }
 
@@ -78,28 +94,46 @@ class ReviewPage extends React.Component {
     e.preventDefault();
     // const formData = new FormData();
     //     formData.append('myImage',this.state.file);
-        
+    
+    //config for text going to mongo
     let config = {
-      headers: {'Authorization': "bearer " + this.props.token}
+      headers: {
+        'Authorization': "bearer " + this.props.token, 
+      }
     }
-    let files = this.state.files;
+    // config for files going to s3
+    let filesConfig = {
+      headers: {
+        'Authorization': "bearer " + this.props.token, 
+        'Content-Type': 'multipart/form-data'
+      }
+    }
+
+    
     let formData = new FormData();
-    formData.append('files', files);
+    for (let i = 0; i < this.state.files[0].length; i++) {
+      console.log('files in state', this.state.files[0][i])
+      formData.append(`file--${i}`, this.state.files[0][i])
+    }
     
 
     let reviewObj = {
       title: this.state.aptFormTitle,
       apt: this.state.apt._id,
       description: this.state.aptFormDescription,
-      wouldRecommend: this.state.aptFormWouldRecommend,
-      // files: files
+      wouldRecommend: this.state.aptFormWouldRecommend
     };
-    
-        axios.post('/api/review', reviewObj, config)
-        .then((res)=> {
-          let updatedReviews = [res.data, ...this.state.reviews];
+
+      axios.post('/api/review', reviewObj, config)
+      .then((res)=> {
+        console.log(res)
+      })
+      .catch((err)=> console.dir(err))
+
+      axios.post('/api/reviewImages', formData, filesConfig)
+        .then(res => {
+          console.log(res)
           this.setState({
-            reviews: updatedReviews,
             aptFormTitle: '',
             aptFormDescription: '',
             aptFormWouldRecommend: '',
@@ -107,9 +141,8 @@ class ReviewPage extends React.Component {
           })
           this.props.history.push("/apartment/" + this.state.apt._id)
         })
-        .catch((err)=> {
-          console.dir(err)
-        }) 
+        .catch(err => console.dir(err))
+        
   }
 
   render() {
@@ -125,20 +158,20 @@ class ReviewPage extends React.Component {
             <div className='form-inner-div'>
             <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
             <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
-            <input name='files' type='file' multiple onChange={this.uploadMultipleFiles} style={{paddingBottom: '20px'}}/>
+            <input name='files' type='file' onChange={this.handleFiles} style={{paddingBottom: '20px'}} multiple/>
             <span style={{ padding: '10px', display: 'flex'}}>
 
               {
-                this.fileArray.length > 0 ?
-                  (this.fileArray).map(imgObj => (
+                this.state.thumbnailFiles.length > 0 ?
+                  (this.state.thumbnailFiles).map(imgObj => (
                         <div className='pic-input-div' key={imgObj.url}>
                           <img src={imgObj.url} alt="..." className='preview-image' />
-                          <input placeholder='picture label' 
+                          {/* <input placeholder='picture label' 
                                  type='text' 
                                  name='pic-description' 
                                  className='pic-description' 
                                  onChange={this.handlePicDescriptionChange}
-                          />
+                          /> */}
                         </div>
                       ))
                 

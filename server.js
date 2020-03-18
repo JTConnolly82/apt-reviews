@@ -35,7 +35,7 @@ app.use("/api", expressJwt({secret: process.env.SECRET || "some secret passphras
 app.use('/auth', require('./routes/auth'));
 app.use("/review", require('./routes/review'));
 app.use("/api/review", require('./routes/apiRouter'));
-// app.use("/api/reviewImages", require('./routes/apiImageRouter'));
+app.use("/api/reviewImages", require('./routes/apiImageRouter'));
 app.use("/apartment", require('./routes/apartment'));
 app.use("/api/apartment", require('./routes/aptApiRouter'));
 app.use("/user", require('./routes/userRouter'));

@@ -9,6 +9,6 @@ const aptSchema = new Schema({
   state: String,
   bedrooms: Number,
   bathrooms: Number
-});
+}, {timestamps: true});
 
 module.exports = mongoose.model('Apartment', aptSchema);
