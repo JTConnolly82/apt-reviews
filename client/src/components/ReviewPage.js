@@ -113,7 +113,7 @@ class ReviewPage extends React.Component {
     let formData = new FormData();
     for (let i = 0; i < this.state.files[0].length; i++) {
       console.log('files in state', this.state.files[0][i])
-      formData.append(`file--${i}`, this.state.files[0][i])
+      formData.append('file', this.state.files[0][i])
     }
     
 

@@ -42,14 +42,12 @@ var upload = multer({
 // });
 
 
-apiImageRouter.post('/',  upload.any(), (req, res, next) => {
-
+apiImageRouter.post('/',  upload.array('file', 10), (req, res, next) => {
   if (err) {
       res.status(500);
       return next(err);
     };
     return res.status(200);
- 
 })
 
 module.exports = apiImageRouter;
