@@ -27,7 +27,7 @@ var upload = multer({
         key: function (req, file, cb) {
           cb(null, file.originalname); //use Date.now() for unique file keys
         },
-        acl: 'public-read-write',
+        acl: 'public-read',
         contentType: function(req, file, cb) {
           cb(null, 'image/jpeg')
         },
