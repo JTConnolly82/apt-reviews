@@ -20,7 +20,9 @@ const reviewSchema = new Schema({
     required: true
   },
   userName: String,
-  images: [String]
+  images: {
+    type: [String] 
+  }
   
 }, {timestamps: true});
 

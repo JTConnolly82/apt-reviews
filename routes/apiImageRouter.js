@@ -31,7 +31,6 @@ var upload = multer({
         contentType: function(req, file, cb) {
           cb(null, 'image/jpeg')
         },
-        region: 'us-west-2'
     })
 });
 
