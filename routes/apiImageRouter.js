@@ -8,14 +8,20 @@ const apiImageRouter = express.Router();
 // const Image = require('../models/image');
 
 
-s3 = new aws.S3();
-
-
-aws.config.update({
+s3 = new aws.S3({
   secretAccessKey: process.env.AWS_SECRET_KEY,
   accessKeyId: process.env.AWS_ACCESS_KEY,
-  region: process.env.AWS_REGION
+  region: process.env.AWS_REGION,
+  s3BucketEndpoint: true,
+  endpoint: "http://johnc-apt-reviews.s3.amazonaws.com"
 });
+
+
+// aws.config.update({
+//   secretAccessKey: process.env.AWS_SECRET_KEY,
+//   accessKeyId: process.env.AWS_ACCESS_KEY,
+//   region: process.env.AWS_REGION
+// });
 
 var upload = multer({
     storage: multerS3({
@@ -31,6 +37,7 @@ var upload = multer({
         contentType: function(req, file, cb) {
           cb(null, 'image/jpeg')
         },
+        endpoint: 'http://johnc-apt-reviews.s3.'
     })
 });
 
