@@ -1,38 +1,34 @@
-import React from 'react';
-import axios from 'axios';
-import { withUser } from '../context/UserProvider';
-import './reviewpage.css';
-
-
+import React from "react";
+import axios from "axios";
+import { withUser } from "../context/UserProvider";
+import "./reviewpage.css";
 
 class ReviewPage extends React.Component {
   constructor() {
     super();
     this.state = {
       apt: {},
-      wouldRecommend: '',
-      reviews: [], 
-      _id: '',
-      aptFormTitle: '',
-      aptFormDescription: '',
-      aptFormWouldRecommend: '',
+      wouldRecommend: "",
+      reviews: [],
+      _id: "",
+      aptFormTitle: "",
+      aptFormDescription: "",
+      aptFormWouldRecommend: "",
       files: [],
+      imageDescriptions: [],
       thumbnailFiles: []
-    }
+    };
   }
 
   componentDidMount() {
-    let {_id} = this.props.match.params
+    let { _id } = this.props.match.params;
     axios.get(`/apartment/${_id}`).then(res => {
       this.setState({
-        apt: res.data,
-      })
-    })
+        apt: res.data
+      });
+    });
   }
 
-  
-
-  
   // uploadMultipleFiles = (e) => {
   //   this.fileObj.push(e.target.files)
   //   console.log('file object', this.fileObj);
@@ -48,153 +44,176 @@ class ReviewPage extends React.Component {
   //       this.setState({ thumbnailFiles: this.fileArray })
   // }
 
-
-
-  // handlePicDescriptionChange = (e) => {
-  //   let { value } = e.target;
-  //   let copiedState = this.state;
-  //   for (let i = 0; i < this.state.files.length; i++) {
-  //     if (copiedState.files[i].url === e.target.previousSibling.src) {
-  //         copiedState.files[i].description = value;
-  //     }
-  //   }
-  //   this.setState({
-  //     ...copiedState
-  //   })
+  // handleFormChange = (e) => {
+  //   const {name, value} = e.target;
+  //   this.setState({ [name]: value })
   // }
 
-  handleFiles = (e) => {
+  handlePicDescriptionChange = e => {};
 
-  
+  handleFiles = e => {
     let thumbnailStagingArray = [];
-        for (let i = 0; i < e.target.files.length; i++) {
-            thumbnailStagingArray.push(
-              {url: URL.createObjectURL(e.target.files[i])}
-              // description: '',
-              // reviewId: this.props.match.params
-            )
-        }
-        
-        this.setState({ thumbnailFiles: thumbnailStagingArray })
+    for (let i = 0; i < e.target.files.length; i++) {
+      thumbnailStagingArray.push({
+        url: URL.createObjectURL(e.target.files[i])
+      });
+    }
 
+    this.setState({ thumbnailFiles: thumbnailStagingArray });
 
     let fileArr = [];
-    fileArr.push(e.target.files)
+    fileArr.push(e.target.files);
+    console.log("file array", fileArr);
     this.setState({
       files: [...fileArr]
-    })
-  }
+    });
+  };
 
-  handleFormChange = (e) => {
-    const {name, value} = e.target;
-    this.setState({ [name]: value })
-  }
+  handleFormChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     // const formData = new FormData();
     //     formData.append('myImage',this.state.file);
-    
+
     //config for text going to mongo
     let config = {
       headers: {
-        'Authorization': "bearer " + this.props.token, 
+        Authorization: "bearer " + this.props.token
       }
-    }
+    };
     // config for files going to s3
     let filesConfig = {
       headers: {
-        'Authorization': "bearer " + this.props.token, 
-        'Content-Type': 'multipart/form-data'
+        Authorization: "bearer " + this.props.token,
+        "Content-Type": "multipart/form-data"
       }
-    }
-
-    
-    let formData = new FormData();
-    for (let i = 0; i < this.state.files[0].length; i++) {
-      console.log('files in state', this.state.files[0][i])
-      formData.append('file', this.state.files[0][i])
-    }
-    
-
-    let reviewObj = {
-      title: this.state.aptFormTitle,
-      apt: this.state.apt._id,
-      description: this.state.aptFormDescription,
-      wouldRecommend: this.state.aptFormWouldRecommend
     };
 
-      axios.post('/api/review', reviewObj, config)
-      .then((res)=> {
-        console.log(res)
-      })
-      .catch((err)=> console.dir(err))
+    let formData = new FormData();
+    for (let i = 0; i < this.state.files[0].length; i++) {
+      console.log("files in state", this.state.files[0][i]);
+      formData.append("file", this.state.files[0][i]);
+    }
 
-      axios.post('/api/reviewImages', formData, filesConfig)
-        .then(res => {
-          console.log(res)
-          this.setState({
-            aptFormTitle: '',
-            aptFormDescription: '',
-            aptFormWouldRecommend: '',
-            files: null
+    axios
+      .post("/api/reviewImages", formData, filesConfig)
+      .then(res => {
+        let reviewObj = {
+          title: this.state.aptFormTitle,
+          apt: this.state.apt._id,
+          description: this.state.aptFormDescription,
+          wouldRecommend: this.state.aptFormWouldRecommend,
+          images: res.data
+        };
+        axios
+          .post("/api/review", reviewObj, config)
+          .then(res => {
+            console.log(res);
+            this.setState({
+              aptFormTitle: "",
+              aptFormDescription: "",
+              aptFormWouldRecommend: "",
+              files: null
+            });
+            this.props.history.push("/apartment/" + this.state.apt._id);
           })
-          this.props.history.push("/apartment/" + this.state.apt._id)
-        })
-        .catch(err => console.dir(err))
-        
-  }
+          .catch(err => console.dir(err));
+      });
+    
+  };
 
   render() {
-
     let aptNum = this.state.apt.apt_number;
     let stAddress = this.state.apt.street_address;
 
     return (
-        <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px'}}>
-          <h2>{`Leave your review ${stAddress ? "for " + stAddress : ''} ${aptNum ? aptNum : ''} below 🏘`}</h2>
-    
-          <form className='apt-details-form' onSubmit={this.handleSubmit}>
-            <div className='form-inner-div'>
-            <input onChange={this.handleFormChange} id='title-input' name='aptFormTitle' value={this.state.aptFormTitle} placeholder='review title'/>
-            <textarea onChange={this.handleFormChange} id='description-input' name='aptFormDescription' value={this.state.aptFormDescription} placeholder='review description' />
-            <input name='files' type='file' onChange={this.handleFiles} style={{paddingBottom: '20px'}} multiple/>
-            <span style={{ padding: '10px', display: 'flex'}}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          marginTop: "100px"
+        }}
+      >
+        <h2>{`Leave your review ${stAddress ? "for " + stAddress : ""} ${
+          aptNum ? aptNum : ""
+        } below 🏘`}</h2>
 
-              {
-                this.state.thumbnailFiles.length > 0 ?
-                  (this.state.thumbnailFiles).map(imgObj => (
-                        <div className='pic-input-div' key={imgObj.url}>
-                          <img src={imgObj.url} alt="..." className='preview-image' />
-                          {/* <input placeholder='picture label' 
+        <form className="apt-details-form" onSubmit={this.handleSubmit}>
+          <div className="form-inner-div">
+            <input
+              onChange={this.handleFormChange}
+              id="title-input"
+              name="aptFormTitle"
+              value={this.state.aptFormTitle}
+              placeholder="review title"
+            />
+            <textarea
+              onChange={this.handleFormChange}
+              id="description-input"
+              name="aptFormDescription"
+              value={this.state.aptFormDescription}
+              placeholder="review description"
+            />
+            <input
+              name="files"
+              type="file"
+              onChange={this.handleFiles}
+              style={{ paddingBottom: "20px" }}
+              multiple
+            />
+            <span style={{ padding: "10px", display: "flex" }}>
+              {this.state.thumbnailFiles.length > 0 ? (
+                this.state.thumbnailFiles.map(imgObj => (
+                  <div className="pic-input-div" key={imgObj.url}>
+                    <img
+                      src={imgObj.url}
+                      alt="image"
+                      className="preview-image"
+                    />
+                    {/* <input placeholder='picture label' 
                                  type='text' 
-                                 name='pic-description' 
+                                 name='imageDescriptions' 
                                  className='pic-description' 
                                  onChange={this.handlePicDescriptionChange}
                           /> */}
-                        </div>
-                      ))
-                
-                :
+                  </div>
+                ))
+              ) : (
                 //space placeholder
-                <div style={{height: '100px', width: '100px'}}></div>
-              }  
-            </span>         
-            <div className='recommend-form'>
+                <div style={{ height: "100px", width: "100px" }}></div>
+              )}
+            </span>
+            <div className="recommend-form">
               <h4>Recommend this apartment?</h4>
-              <div style={{display: 'flex', marginLeft: '10px'}}>
-                <h4 style={{marginRight: '5px'}}>Yes</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='true' style={{marginRight: '5px'}}/>
-                <h4 style={{marginRight: '5px'}}>No</h4><input onChange={this.handleFormChange} name='aptFormWouldRecommend' type='radio' value='false' />
+              <div style={{ display: "flex", marginLeft: "10px" }}>
+                <h4 style={{ marginRight: "5px" }}>Yes</h4>
+                <input
+                  onChange={this.handleFormChange}
+                  name="aptFormWouldRecommend"
+                  type="radio"
+                  value="true"
+                  style={{ marginRight: "5px" }}
+                />
+                <h4 style={{ marginRight: "5px" }}>No</h4>
+                <input
+                  onChange={this.handleFormChange}
+                  name="aptFormWouldRecommend"
+                  type="radio"
+                  value="false"
+                />
               </div>
             </div>
-            <button id='apt-details-btn'>Post Review</button>
-            </div>
-          </form>
-
-        </div>
-    )
+            <button id="apt-details-btn">Post Review</button>
+          </div>
+        </form>
+      </div>
+    );
   }
 }
 
 export default withUser(ReviewPage);
- 

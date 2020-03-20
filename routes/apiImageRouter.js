@@ -8,12 +8,8 @@ const apiImageRouter = express.Router();
 // const Image = require('../models/image');
 
 
-
-
-
 s3 = new aws.S3();
 
-console.log('s3', s3);
 
 aws.config.update({
   secretAccessKey: process.env.AWS_SECRET_KEY,
@@ -29,10 +25,12 @@ var upload = multer({
           cb(null, Object.assign({}, req.body));
         },
         key: function (req, file, cb) {
-          console.log('req in multer', req)
-          console.log('fileinsidemulter', file);
           cb(null, file.originalname); //use Date.now() for unique file keys
-      }
+        },
+        acl: 'public-read',
+        contentType: function(req, file, cb) {
+          cb(null, 'image/jpeg')
+        }
     })
 });
 
@@ -43,11 +41,18 @@ var upload = multer({
 
 
 apiImageRouter.post('/',  upload.array('file', 10), (req, res, next) => {
-  if (err) {
-      res.status(500);
-      return next(err);
-    };
-    return res.status(200);
+
+  // get image urls to mongodb
+  // need to extract url 
+  // send back in response obj to be passed into review obj, then saved to mongo
+
+
+  let images = req.files.map((file) => {
+    return file.location.toString();
+  })
+  console.log('sent images', images)
+  res.send(images)
+  
 })
 
 module.exports = apiImageRouter;
