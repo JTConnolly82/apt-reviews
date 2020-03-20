@@ -6,24 +6,6 @@ const Review = require('../models/review');
 
 
 
-
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//       cb(null, DIR);
-//   },
-//   filename: (req, file, cb) => {
-//       const fileName = file.originalname.toLowerCase().split(' ').join('-');
-//       cb(null, uuid() + '-' + fileName)
-//   }
-// });
-
-// const upload = multer({storage: storage})
-
-
-
-// if using multer
-// , upload.single('aptImage') is second argument to post
-
 apiRouter.post('/',  (req, res, next) => {
   //add users id to new obj before saving the newly created review
   

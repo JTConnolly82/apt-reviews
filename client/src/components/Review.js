@@ -16,6 +16,8 @@ class Review extends React.Component {
     }
   }
 
+  
+
   handleEditToggle = () => {
     this.setState({
       editing: true
@@ -46,8 +48,18 @@ class Review extends React.Component {
     this.props.handleDelete(this.props._id);
   };
 
+  componentDidMount = () => {
+   
+  }
+
+  imageStyles = {
+    maxWidth: '200px',
+    maxHeight: '250px'
+  }
+
 
   render() {
+    
 
     let dateCreated = new Date(this.props.createdAt).toDateString();
     let dateUpdated = new Date(this.props.updatedAt).toDateString();
@@ -58,6 +70,11 @@ class Review extends React.Component {
     } else {
       displayedDate = `Created ${dateCreated}`
     }
+
+    let mappedImageUrls = this.props.images.map((url) => {
+      return <img style={this.imageStyles}src={url.toString()} alt='pic' />
+    })
+    
 
     return (
      <> { this.state.editing ? 
@@ -80,10 +97,13 @@ class Review extends React.Component {
             <h3>👤 {this.props.userName}</h3>
             <h5 style={{color: 'grey'}}>{displayedDate}</h5>
             <span style={{display: 'flex', alignItems: 'center', marginBottom: '25px', marginTop: '10px'}}>
-              <h4 style={{marginRight: '4px', color: '#42474c;'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
+              <h4 style={{marginRight: '4px', color: '#42474c'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
             </span>
             <h2>{this.props.title}</h2>
             <h3>{this.props.description}</h3>
+            <div>
+              {mappedImageUrls.length > 0 ? mappedImageUrls : <h3>No images for this review</h3>}
+            </div>
           </div>
           <div className='review-buttons'>
             {this.props.userId === this.props.user && <>

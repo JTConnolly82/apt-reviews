@@ -17,7 +17,7 @@
   border-radius: 3px;
   font-size: 12px;
   background-color: inherit;
-  cursor: pointer
+  cursor: pointer;
 }
 #delete:hover {
   color: rgb(252, 128, 100);
