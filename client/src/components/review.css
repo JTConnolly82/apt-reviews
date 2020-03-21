@@ -80,6 +80,7 @@ padding: 6px;
   width: 200px;
   height: 150px;
   padding: 5px;
+  border-radius: 10px;
 }
 
 .images-and-button-container {
