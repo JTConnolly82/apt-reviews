@@ -41,21 +41,19 @@ class Review extends React.Component {
     this.props.handleEditSubmit(editObj);
   }
 
+  // setImageContainer = () => {
+  //   document.getElementsByClassName('review-image-container')
+  //     .style = {
+  //       overflowX: 'scroll'
+  //     }
+  // }
+
   
 
   handleDeletePass = (e) => {
     e.preventDefault();
     this.props.handleDelete(this.props._id);
   };
-
-  componentDidMount = () => {
-   
-  }
-
-  imageStyles = {
-    maxWidth: '200px',
-    maxHeight: '250px'
-  }
 
 
   render() {
@@ -72,9 +70,8 @@ class Review extends React.Component {
     }
 
     let mappedImageUrls = this.props.images.map((url) => {
-      return <img style={this.imageStyles}src={url.toString()} alt='pic' />
+      return <img className='review-images' src={url.toString()} alt='pic' />
     })
-    
 
     return (
      <> { this.state.editing ? 
@@ -101,8 +98,11 @@ class Review extends React.Component {
             </span>
             <h2>{this.props.title}</h2>
             <h3>{this.props.description}</h3>
-            <div>
-              {mappedImageUrls.length > 0 ? mappedImageUrls : <h3>No images for this review</h3>}
+            <div className='images-and-button-container'>
+              <div className='review-images-container'>
+                {mappedImageUrls.length > 0 ? mappedImageUrls : <h3>No images for this review</h3>}
+              </div>
+              {/* <button className='image-reveal-button' id='img-button' onClick={this.setImageContainer}>See All Pictures</button> */}
             </div>
           </div>
           <div className='review-buttons'>
@@ -116,7 +116,6 @@ class Review extends React.Component {
       }</>
     )
   }
-
 
 
 }

@@ -5,7 +5,7 @@ const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 require('dotenv').config()
 const apiImageRouter = express.Router();
-// const Image = require('../models/image');
+
 
 
 s3 = new aws.S3({
@@ -57,7 +57,6 @@ apiImageRouter.post('/',  upload.array('file', 10), (req, res, next) => {
   let images = req.files.map((file) => {
     return file.location.toString();
   })
-  console.log('sent images', images)
   res.send(images)
   
 })

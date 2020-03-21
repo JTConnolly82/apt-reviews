@@ -63,7 +63,6 @@ class ReviewPage extends React.Component {
 
     let fileArr = [];
     fileArr.push(e.target.files);
-    console.log("file array", fileArr);
     this.setState({
       files: [...fileArr]
     });
@@ -95,7 +94,6 @@ class ReviewPage extends React.Component {
 
     let formData = new FormData();
     for (let i = 0; i < this.state.files[0].length; i++) {
-      console.log("files in state", this.state.files[0][i]);
       formData.append("file", this.state.files[0][i]);
     }
 
@@ -112,7 +110,6 @@ class ReviewPage extends React.Component {
         axios
           .post("/api/review", reviewObj, config)
           .then(res => {
-            console.log(res);
             this.setState({
               aptFormTitle: "",
               aptFormDescription: "",

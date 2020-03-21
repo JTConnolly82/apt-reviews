@@ -39,7 +39,6 @@ apiRouter.put('/', (req, res, next) => {
       res.status(500)
       return next(err)
     }
-    console.log(updatedReview.updatedAt)
     return res.send(updatedReview)
   })
 })
