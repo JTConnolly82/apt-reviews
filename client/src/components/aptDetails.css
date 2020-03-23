@@ -192,7 +192,11 @@ box-shadow: 0 1px 1px rgba(101, 101, 101,0.19),
 
 .bed-bath-div {
   display: flex;
+  justify-content: center;
   color: #42474c;
+}
+.bed-bath-div h2 {
+  font-size: 28px;
 }
 
 #bath {

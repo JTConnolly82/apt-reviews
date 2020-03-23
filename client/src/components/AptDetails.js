@@ -168,16 +168,16 @@ class AptDetails extends React.Component {
       <div className='apt-details-wrapper'>
           <div className='apt-details-main'>
             <div className='apt-details-head'>
-            <h1>{`${street_address} ${apt_number && apt_number}`}</h1>
-            <span style={{display: 'flex'}}>
-              <h3>{`${city} , ${state}`}</h3>
+            <h1 style={{textAlign: 'center'}}>{`${street_address} ${apt_number && apt_number}`}</h1>
+            <span style={{display: 'flex', justifyContent: 'center'}}>
+              <h3 style={{fontSize: '20px'}}>{`${city} , ${state}`}</h3>
             </span>
             <hr style={{marginTop: '5px', marginBottom: '5px', maxWidth: '550px'}}/>
             <div className='bed-bath-div'>
               <h2 id='bath'>{bathrooms} 🛁</h2>
               <h2 id='bed'>{bedrooms} 🛏</h2>
             </div>
-            {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px'}}>{Math.round(percentageofRenters)}% of reviewers recommend this apartment</h2>: <h2></h2>}
+            {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px', fontSize: '22px', textAlign: 'center'}}>{Math.round(percentageofRenters)}% of reviewers recommend</h2>: <h2></h2>}
             </div>
           
         

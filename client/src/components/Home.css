@@ -29,7 +29,7 @@ body {
 
 .home-hero h3 {
   font-family: 'Open Sans', sans-serif;
-  
+  font-size: 22px;
   margin-top: 20px;
   color: #906509;
   font-weight: 200;
@@ -45,11 +45,18 @@ body {
 }
 
 .home-statement {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-top: 90px;
   margin-bottom: 90px;
   font-size: 20px;
-  width: 56%;
+  padding: 10px;
+}
+
+.home-statement h2 {
+  font-size: 22px;
 }
 
 .bar-horizontal-home-statement {
@@ -58,6 +65,7 @@ body {
   background-color: #b8c4c2;
   margin: 0 auto;
   margin-top: 90px;
+  align-self: center;
 }
 
 #apt-icon {
@@ -130,6 +138,10 @@ body {
   display: flex;
   align-items: center;
   padding: 10px;
+}
+
+.text-wrap h3 {
+  font-size: 18px;
 }
 
 
