@@ -10,7 +10,7 @@ class Home extends React.Component {
       <div>
         <div className='home-hero'>
             {/* <h1>Rental Unit Reviews</h1> */}
-            <h2>Apartment Reviews</h2>
+            <h2>Apt  Reviews</h2>
             <h3>Read our reviews to help find a better apartment.</h3>
               <AptSearchbar />
         </div>
@@ -19,6 +19,9 @@ class Home extends React.Component {
             <h2>
               Read our tenant reviews to learn about apartments.
             </h2>
+            <div className='bar-horizontal-home-statement'>
+              
+            </div>
           </div>
           <div id='apt-wrap'>
               <div className='text-wrap'>

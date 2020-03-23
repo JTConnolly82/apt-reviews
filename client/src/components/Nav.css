@@ -9,12 +9,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 0;
+  position: relative;
 }
 
 .nav-title {
   color: #004c3f;
   font-size: 40px;
-  padding: 5px;
+  margin-left: 10px;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -41,21 +42,47 @@
   
 }
 
+.hamburger-div {
+  margin-right: 10px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
 
-.nav-options {
-  display: 'flex';
-  align-items: 'center';
+#burger-menu-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  bottom: -70px;
+  right: 0;
+  width: 120px;
+  height: 70px;
+  background-color: #fbf7ed;
+}
+
+#dropdown-logout {
+  border: none;
+  background-color: inherit;
+  font-size: 15px;
 }
 
 @media (max-width: 545px) {
   .nav-title {
-    font-size: 30px;
+    font-size: 32px;
   }
   .nav-links {
-    margin: 5px;
+    
   }
   .log-btn {
-    
     margin-top: 10px;
   }
+  
 }

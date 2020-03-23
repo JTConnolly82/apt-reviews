@@ -3,13 +3,16 @@ form {
   display: flex;
   align-items: center;
 }
+
+
+
+
 #searchbar{
   font-size: 14px;
   /* border: 1px solid rgb(48, 48, 48); */
   border-right: none;
   width: 450px;
   height: 38px;
- 
 }
 #search-button {
   background-color: white;
@@ -42,4 +45,14 @@ form {
 
 #no-form {
   
+}
+
+@media (max-width: 545px) {
+  #searchbar{
+    font-size: 14px;
+    /* border: 1px solid rgb(48, 48, 48); */
+    border-right: none;
+    width: 320px;
+    height: 38px;
+  }
 }

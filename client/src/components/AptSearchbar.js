@@ -39,9 +39,7 @@ class AptSearchbar extends React.Component {
   }
 
 
-  selectStyles = {
-    cursor: 'text',
-  }
+  
 
   noOptions = () => {
     // return "Unit not found, want to add this location?"
@@ -101,7 +99,6 @@ class AptSearchbar extends React.Component {
                   placeholder='Search'
                   onChange={this.handleChange}
                   onRemove={this.handleRemove}
-                  style={this.selectStyles}
                    />
           {this.state.selectedApt ? 
             <Link to={`/apartment/${this.state.selectedApt}`} id='search-button'><img id='search-png' src={process.env.PUBLIC_URL + '/search.png'} /></Link>
