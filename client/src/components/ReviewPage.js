@@ -136,7 +136,7 @@ class ReviewPage extends React.Component {
           marginTop: "100px"
         }}
       >
-        <h2>{`Leave your review ${stAddress ? "for " + stAddress : ""} ${
+        <h2 style={{fontSize: '22px'}}>{`Leave your review ${stAddress ? "for " + stAddress : ""} ${
           aptNum ? aptNum : ""
         } below 🏘`}</h2>
 

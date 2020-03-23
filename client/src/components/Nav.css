@@ -59,6 +59,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-right: 10px;
   justify-content: space-around;
   position: absolute;
   bottom: -70px;
@@ -67,12 +68,16 @@
   height: 70px;
   background-color: #fbf7ed;
   border-radius: 0px 0px 2px 2px;
+  -webkit-box-shadow: 0 8px 7px -7px rgb(154, 154, 154);
+  -moz-box-shadow: 0 8px 7px -7px rgb(154, 154, 154);
+       box-shadow: 0 8px 7px -7px rgb(154, 154, 154);
 }
 
 #dropdown-logout {
   border: none;
   background-color: inherit;
-  font-size: 15px;
+  font-size: 16px;
+  font-weight: lighter;
 }
 
 @media (max-width: 545px) {

@@ -25,7 +25,7 @@ const Nav = (props) => {
     menuStyle === true ? 
     menuDisplay = 
       <div className='dropdown-menu' onClick={toggleMenu}>
-        <Link to={`/account/${props.user._id}`}>My Account</Link><button id='dropdown-logout' onClick={props.logout}>Logout</button>
+        <Link to={`/account/${props.user._id}`}>My Account</Link><h3 id='dropdown-logout' onClick={props.logout}>Logout</h3>
       </div> 
     :
     menuDisplay = <div></div>

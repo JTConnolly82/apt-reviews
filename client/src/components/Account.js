@@ -45,7 +45,7 @@ class Account extends React.Component {
     return (
       <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <div className='account-main'>
-          <h1 style={{marginTop: '32px'}}>{this.state.user}</h1>
+          <h1 style={{marginTop: '32px', fontSize: '22px'}}>{this.state.user}</h1>
         </div>
         <div className='account-reviews-wrap'>
           <h2>Your Reviews</h2>
