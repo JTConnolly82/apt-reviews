@@ -66,6 +66,7 @@
   width: 120px;
   height: 70px;
   background-color: #fbf7ed;
+  border-radius: 0px 0px 2px 2px;
 }
 
 #dropdown-logout {
