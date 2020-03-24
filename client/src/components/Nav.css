@@ -27,6 +27,7 @@
   border: 1px solid #b8c4c2;
   font-size: 15px;
   cursor: pointer;
+  margin-right: 10px;
 }
 
 .log-btn {
@@ -39,7 +40,7 @@
   background-color: inherit;
   font-size: 15px;
   cursor: pointer;
-  
+  margin-right: 10px;
 }
 
 .hamburger-div {
