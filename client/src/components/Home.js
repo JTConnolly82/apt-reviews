@@ -11,7 +11,7 @@ class Home extends React.Component {
         <div className='home-hero'>
             {/* <h1>Rental Unit Reviews</h1> */}
             <h2>Apt  Reviews</h2>
-            <h3>Read our reviews to help find a better apartment.</h3>
+            <h3>Search by address to learn about apartments before moving in.</h3>
               <AptSearchbar />
         </div>
         <div className='home-content'>

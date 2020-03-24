@@ -50,7 +50,11 @@ authRouter.post("/login", (req, res, next) => {
           return next(new Error('username or password are incorrect'))
         }
         //at this point the user exists and their password matches
-        const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
+        const token = jwt.sign(
+          user.withoutPassword(), 
+          process.env.SECRET,
+          { expiresIn: '3h' }
+          );
         return res.status(200)
         .send({ token, user: user.withoutPassword() })
     })

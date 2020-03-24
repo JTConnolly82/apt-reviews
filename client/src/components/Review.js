@@ -97,7 +97,7 @@ class Review extends React.Component {
               <h4 style={{marginRight: '4px', color: '#42474c'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
             </span>
             <h2>{this.props.title}</h2>
-            <h3>{this.props.description}</h3>
+            <h3 style={{marginBottom: '10px'}}>{this.props.description}</h3>
             <div className='images-and-button-container'>
               <div className='review-images-container'>
                 {mappedImageUrls.length > 0 ? mappedImageUrls : <h3>No images for this review</h3>}

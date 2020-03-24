@@ -14,7 +14,7 @@
 
 .nav-title {
   color: #004c3f;
-  font-size: 40px;
+  font-size: 35px;
   margin-left: 10px;
   font-family: 'Open Sans', sans-serif;
 }
@@ -83,7 +83,7 @@
 
 @media (max-width: 545px) {
   .nav-title {
-    font-size: 32px;
+
   }
   .nav-links {
     

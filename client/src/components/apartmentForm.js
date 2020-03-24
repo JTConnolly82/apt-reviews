@@ -55,7 +55,7 @@ class apartmentForm extends React.Component {
     return (
       // reviews apartments will post with reviews as empty array
       <div className='apt-form-wrapper'>
-        <h1>Add an Apartment</h1>
+        <h1 style={{fontSize: '22px'}}>Add an Apartment</h1>
         <form className='apt-form' onSubmit={this.handleSubmit}>
           <input className='apt-inputs' onChange={this.handleChange} name='street_address' placeholder='street address' />
           <input className='apt-inputs' onChange={this.handleChange} name='apt_number' placeholder='apartment number' />

@@ -130,7 +130,6 @@ class AptDetails extends React.Component {
   fileChangedHandler = (event) => {
     const file = event.target.files[0];
     this.setState({ file: file })
-    
   }
 
   render() {
@@ -172,7 +171,7 @@ class AptDetails extends React.Component {
             <span style={{display: 'flex', justifyContent: 'center'}}>
               <h3 style={{fontSize: '20px'}}>{`${city} , ${state}`}</h3>
             </span>
-            <hr style={{marginTop: '5px', marginBottom: '5px', maxWidth: '550px'}}/>
+            <div id='apt-details-title-divider'></div>
             <div className='bed-bath-div'>
               <h2 id='bath'>{bathrooms} 🛁</h2>
               <h2 id='bed'>{bedrooms} 🛏</h2>

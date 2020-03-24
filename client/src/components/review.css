@@ -3,7 +3,7 @@
 .review-container {
   padding: 10px;
   margin: 14px;
-  width: 50vw;
+  width: 600px;
   display: flex;
   justify-content: space-between;
   min-width: 350px;
@@ -71,15 +71,14 @@ padding: 6px;
 
 .review-images-container {
   margin-top: 10px;
-  height: 165px;
+  height: 300px;
   overflow-y: scroll;
-  overflow-x: scroll; 
+  overflow-x: scroll;
 }
 
 .review-images {
-  width: 200px;
-  height: 150px;
-  padding: 5px;
+  width: 367px;
+  height: 275px;
   border-radius: 10px;
 }
 
@@ -141,18 +140,18 @@ padding: 6px;
 
 @media (max-width: 1680) {
   .review-container {
-    width: 600px;
+    width: 650px;
   }
 }
 
 @media (max-width: 1000px) {
   .review-container {
-    width: 85vw;
+    width: 550px;
   }
 }
 
 @media (max-width: 545px) {
   .review-container {
-    width: 85vw;
+    width: 410px;
   }
 }

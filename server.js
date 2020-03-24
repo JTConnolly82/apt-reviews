@@ -40,6 +40,7 @@ app.use("/apartment", require('./routes/apartment'));
 app.use("/api/apartment", require('./routes/aptApiRouter'));
 app.use("/user", require('./routes/userRouter'));
 
+
 //global error handler
 app.use((err, req, res, next) => {
   console.error(err);
@@ -48,7 +49,6 @@ app.use((err, req, res, next) => {
   }
   return res.send({errMsg: err.message});
 });
-
 
 
 app.get("*", (req, res) => {

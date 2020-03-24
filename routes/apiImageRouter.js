@@ -3,6 +3,7 @@ const express = require('express');
 const multer = require('multer');
 const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
+const crypto = require('crypto');
 require('dotenv').config()
 const apiImageRouter = express.Router();
 
@@ -16,6 +17,13 @@ s3 = new aws.S3({
   endpoint: "http://johnc-apt-reviews.s3.amazonaws.com"
 });
 
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true)
+  } else {
+      cb(null, false)
+  }
+}
 
 // aws.config.update({
 //   secretAccessKey: process.env.AWS_SECRET_KEY,
@@ -27,12 +35,15 @@ var upload = multer({
     storage: multerS3({
         s3: s3,
         bucket: 'johnc-apt-reviews',
-        metadata: function (req, file, cb) {
-          cb(null, Object.assign({}, req.body));
+        filename: function (req, file, cb) {
+          crypto.pseudoRandomBytes(16, function (err, raw) {
+            cb(null, raw.toString('hex') + Date.now() + '.' + mime.extension(file.mimetype));
+          });
         },
         key: function (req, file, cb) {
-          cb(null, file.originalname); //use Date.now() for unique file keys
+          cb(null, `${Date.now()}`); //use Date.now() for unique file keys
         },
+        fileFilter: fileFilter,
         acl: 'public-read',
         contentType: function(req, file, cb) {
           cb(null, 'image/jpeg')
@@ -47,7 +58,7 @@ var upload = multer({
 // });
 
 
-apiImageRouter.post('/',  upload.array('file', 10), (req, res, next) => {
+apiImageRouter.post('/',  upload.array('file', 5), (req, res, next) => {
 
   // get image urls to mongodb
   // need to extract url 

@@ -16,7 +16,8 @@ class ReviewPage extends React.Component {
       aptFormWouldRecommend: "",
       files: [],
       imageDescriptions: [],
-      thumbnailFiles: []
+      thumbnailFiles: [],
+      response: ''
     };
   }
 
@@ -97,6 +98,8 @@ class ReviewPage extends React.Component {
       formData.append("file", this.state.files[0][i]);
     }
 
+    let responseMsg;
+
     axios
       .post("/api/reviewImages", formData, filesConfig)
       .then(res => {
@@ -132,11 +135,10 @@ class ReviewPage extends React.Component {
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
-          marginTop: "100px"
+          alignItems: "center"
         }}
       >
-        <h2 style={{fontSize: '22px'}}>{`Leave your review ${stAddress ? "for " + stAddress : ""} ${
+        <h2 style={{fontSize: '22px', textAlign: 'center', marginTop: '100px'}}>{`Leave your review ${stAddress ? "for " + stAddress : ""} ${
           aptNum ? aptNum : ""
         } below 🏘`}</h2>
 
@@ -160,10 +162,10 @@ class ReviewPage extends React.Component {
               name="files"
               type="file"
               onChange={this.handleFiles}
-              style={{ paddingBottom: "20px" }}
+              style={{ marginBottom: "20px" }}
               multiple
             />
-            <span style={{ padding: "10px", display: "flex" }}>
+            <span style={{ display: "flex" }}>
               {this.state.thumbnailFiles.length > 0 ? (
                 this.state.thumbnailFiles.map(imgObj => (
                   <div className="pic-input-div" key={imgObj.url}>
