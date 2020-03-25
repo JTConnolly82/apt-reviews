@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import 'pure-react-carousel/dist/react-carousel.es.css';
+import windowSize from 'react-window-size';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import { withUser } from '../context/UserProvider';
 import Review from './Review';
 import './aptDetails.css';
 import { Link } from 'react-router-dom';
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
 
 
 
@@ -28,9 +28,11 @@ class AptDetails extends React.Component {
       file: null
     }
   }
-
+  
 
   componentDidMount() {
+   
+
     let {_id} = this.props.match.params
     axios.get(`/apartment/${_id}`).then(res => {
       this.setState({
@@ -38,10 +40,10 @@ class AptDetails extends React.Component {
       })
     }).then(
       axios.get(`/review/${this.props.match.params._id}`).then(res => {
-        
         let aptReviews = res.data
         this.setState({
-          reviews: aptReviews.reverse()
+          reviews: aptReviews.reverse(),
+          noReviewsMessage: 'Leave the first review for this location!'
         })
       })
     )
@@ -134,13 +136,9 @@ class AptDetails extends React.Component {
 
   render() {
 
-    // const settings = {
-    //   dots: true,
-    //   infinite: true,
-    //   speed: 400,
-    //   slidesToShow: 1,
-    //   slidesToScroll: 1,
-    // };
+
+
+    
     
     let {street_address, apt_number, city, state, bathrooms, bedrooms} = this.state.apt;
     let recommendations = 0;
@@ -163,6 +161,82 @@ class AptDetails extends React.Component {
     })
 
     let percentageofRenters = (recommendations / this.state.reviews.length)*100;
+
+    let aptImages = this.state.reviews.flatMap((review) => {
+      return review.images
+    })
+
+    console.log('apt images', aptImages)
+
+    
+    let slides = []
+    for (let i = 0; i < aptImages.length; i++) {
+      slides.push(<Slide index={i} style={{borderLeft: '3px solid #fbf7ed', borderRight: '3px solid #fbf7ed', boxSizing: 'border-box'}}>
+                    <img src={aptImages[i].toString()} style={{height: '270px', width: '360px'}} />
+                  </Slide>)
+    }
+
+    console.log('slides', slides)
+
+    let sliderStyles;
+    let visibleSlides;
+
+    // sliderStyles = {
+    //   width: '1440px', height: '270px', marginTop: '30px'
+    // }
+    // if (slides.length >= 4) {
+    //   visibleSlides = 4
+    // }
+
+    // responsiveness for slider
+    // if (this.props.windowWidth > 1260) {
+      
+    // }
+    // if (this.props.windowWidth <= 1260) {
+    //   sliderStyles = {
+    //     width: '1080px', height: '270px', marginTop: '30px'
+    //   }
+    //   visibleSlides = 3
+    // }
+    // if (this.props.windowWidth <= 1080) {
+    //   sliderStyles = {
+    //     width: '720px', height: '270px', marginTop: '30px'
+    //   }
+    //   visibleSlides = 2
+    // }
+    // if (this.props.windowWidth <= 720) {
+    //   sliderStyles = {
+    //     width: '360px', height: '270px', marginTop: '30px'
+    //   }
+    //   visibleSlides = 1
+    // }
+
+    if (slides.length === 1 || this.props.windowWidth <= 720) {
+      sliderStyles = {
+            width: '360px', height: '270px', marginTop: '30px'
+          }
+      visibleSlides = 1
+    }
+    if (slides.length === 2 && this.props.windowWidth > 720 || slides.length >= 2 && this.props.windowWidth > 720 ) {
+      sliderStyles = {
+            width: '720px', height: '270px', marginTop: '30px'
+          }
+      visibleSlides = 2
+    }
+    if (slides.length >= 3 && this.props.windowWidth > 1080) {
+      sliderStyles = {
+            width: '1080px', height: '270px', marginTop: '30px'
+          }
+      visibleSlides = 3
+    }
+    if (slides.length >= 4 && this.props.windowWidth > 1260) {
+      sliderStyles = {
+          width: '1440px', height: '270px', marginTop: '30px'
+        }
+      visibleSlides = 4
+       
+    }
+
     return (
       <div className='apt-details-wrapper'>
           <div className='apt-details-main'>
@@ -178,9 +252,22 @@ class AptDetails extends React.Component {
             </div>
             {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px', fontSize: '22px', textAlign: 'center'}}>{Math.round(percentageofRenters)}% of reviewers recommend</h2>: <h2></h2>}
             </div>
-          
-        
         </div>
+
+        <CarouselProvider
+        naturalSlideWidth={4}
+        naturalSlideHeight={3}
+        totalSlides={slides.length}
+        visibleSlides={visibleSlides}
+        touchEnabled={true}
+        infinite={true}
+        >
+        <Slider style={sliderStyles}>
+          {slides}
+        </Slider>
+        <ButtonBack>Back</ButtonBack>
+        <ButtonNext>Next</ButtonNext>
+      </CarouselProvider>
 
         { this.props.token ? 
           <Link to={`/review/${this.state.apt._id}`} id='leave-review-link'>Start Your Review</Link>
@@ -196,7 +283,7 @@ class AptDetails extends React.Component {
                                            </> 
                         : 
                         <div>
-                        <h2 className='no-review-text'>Leave the first review for this location!</h2>
+                       <h2 className='no-review-text'>{this.state.noReviewsMessage}</h2>
                         {/* <img style={{maxWidth: '540px'}} src='https://image.freepik.com/free-vector/login-concept-illustration_114360-757.jpg' /> */}
                         </div>
                         }
@@ -206,4 +293,4 @@ class AptDetails extends React.Component {
   }
 }
 
-export default withUser(AptDetails);
+export default withUser(windowSize(AptDetails));

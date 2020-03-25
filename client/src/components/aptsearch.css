@@ -55,6 +55,8 @@ form {
 
 .noResultMessage {
   margin-bottom: 16px;
+  /* find where the brown color was coming from */
+  color: #42474c !important;
 }
 
 
