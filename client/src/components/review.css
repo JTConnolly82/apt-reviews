@@ -155,6 +155,6 @@ align-items: center;
 
 @media (max-width: 545px) {
   .review-container {
-    width: 410px;
+    width: 400px;
   }
 }

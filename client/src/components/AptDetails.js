@@ -172,7 +172,7 @@ class AptDetails extends React.Component {
     let slides = []
     for (let i = 0; i < aptImages.length; i++) {
       slides.push(<Slide index={i} style={{borderLeft: '3px solid #fbf7ed', borderRight: '3px solid #fbf7ed', boxSizing: 'border-box'}}>
-                    <img src={aptImages[i].toString()} style={{height: '270px', width: '360px'}} />
+                    <img src={aptImages[i].toString()} style={{height: '259px', width: '345px'}} />
                   </Slide>)
     }
 
@@ -213,25 +213,25 @@ class AptDetails extends React.Component {
 
     if (slides.length === 1 || this.props.windowWidth <= 720) {
       sliderStyles = {
-            width: '360px', height: '270px', marginTop: '30px'
+            width: '345px', height: '270px', marginTop: '30px'
           }
       visibleSlides = 1
     }
     if (slides.length === 2 && this.props.windowWidth > 720 || slides.length >= 2 && this.props.windowWidth > 720 ) {
       sliderStyles = {
-            width: '720px', height: '270px', marginTop: '30px'
+            width: '690px', height: '270px', marginTop: '30px'
           }
       visibleSlides = 2
     }
     if (slides.length >= 3 && this.props.windowWidth > 1080) {
       sliderStyles = {
-            width: '1080px', height: '270px', marginTop: '30px'
+            width: '1035px', height: '270px', marginTop: '30px'
           }
       visibleSlides = 3
     }
-    if (slides.length >= 4 && this.props.windowWidth > 1260) {
+    if (slides.length >= 4 && this.props.windowWidth > 1430) {
       sliderStyles = {
-          width: '1440px', height: '270px', marginTop: '30px'
+          width: '1380px', height: '270px', marginTop: '30px'
         }
       visibleSlides = 4
        
@@ -253,21 +253,24 @@ class AptDetails extends React.Component {
             {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px', fontSize: '22px', textAlign: 'center'}}>{Math.round(percentageofRenters)}% of reviewers recommend</h2>: <h2></h2>}
             </div>
         </div>
-
-        <CarouselProvider
-        naturalSlideWidth={4}
-        naturalSlideHeight={3}
-        totalSlides={slides.length}
-        visibleSlides={visibleSlides}
-        touchEnabled={true}
-        infinite={true}
-        >
-        <Slider style={sliderStyles}>
-          {slides}
-        </Slider>
-        <ButtonBack>Back</ButtonBack>
-        <ButtonNext>Next</ButtonNext>
-      </CarouselProvider>
+        
+          <CarouselProvider
+          naturalSlideWidth={4}
+          naturalSlideHeight={3}
+          totalSlides={slides.length}
+          visibleSlides={visibleSlides}
+          touchEnabled={true}
+          infinite={true}
+          style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+          >
+          <div style={{display: 'flex', marginBottom: '10px', alignItems: 'center'}}>
+            <ButtonBack style={{backgroundColor: 'inherit', border: 'none'}}><img src={process.env.PUBLIC_URL + '/back.png'} style={{width: '20px', height: '20px', marginTop: '5px'}} /></ButtonBack>
+                <Slider style={sliderStyles}>
+                  {slides}
+                </Slider>
+              <ButtonNext style={{backgroundColor: 'inherit', border: 'none'}}><img src={process.env.PUBLIC_URL + '/next.png'} style={{width: '20px', height: '20px', marginTop: '5px'}} /></ButtonNext>
+          </div>
+        </CarouselProvider>
 
         { this.props.token ? 
           <Link to={`/review/${this.state.apt._id}`} id='leave-review-link'>Start Your Review</Link>
