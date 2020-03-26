@@ -35,7 +35,7 @@ const Nav = (props) => {
 
       
       <div className='nav-container'>
-        <Link to='/'><h1 className='nav-title'>Apt Reviews</h1></Link>
+        <Link to='/'><h1 className='nav-title'>Apt Reviews  </h1></Link>
         
         <div className='nav-options'>
           {/* <Link to='/apartment' className='nav-links'>Add Apt</Link> */}
