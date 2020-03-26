@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@800&display=swap');
 
 body {
-  background-color: #fbf7ed;
+  /* background-color: #fbf7ed; */
   margin: 0;
   padding: 0px 0;
 }
@@ -19,7 +19,6 @@ body {
 
 
 .home-hero h2 {
-  font-family: 'Open Sans', sans-serif;
   letter-spacing: 1px;
   margin-top: 200px;
   font-size: 60px;
@@ -28,7 +27,6 @@ body {
 }
 
 .home-hero h3 {
-  font-family: 'Open Sans', sans-serif;
   font-size: 22px;
   margin-top: 20px;
   color: #906509;

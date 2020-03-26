@@ -171,9 +171,11 @@ class AptDetails extends React.Component {
     
     let slides = []
     for (let i = 0; i < aptImages.length; i++) {
-      slides.push(<Slide index={i} style={{borderLeft: '3px solid #fbf7ed', borderRight: '3px solid #fbf7ed', boxSizing: 'border-box'}}>
+      slides.push(
+                  <Slide index={i} style={{borderLeft: '3px solid #fbf7ed', borderRight: '3px solid #fbf7ed', boxSizing: 'border-box'}}>
                     <img src={aptImages[i].toString()} style={{height: '259px', width: '345px'}} />
-                  </Slide>)
+                  </Slide>
+                  )
     }
 
     console.log('slides', slides)
@@ -239,21 +241,6 @@ class AptDetails extends React.Component {
 
     return (
       <div className='apt-details-wrapper'>
-          <div className='apt-details-main'>
-            <div className='apt-details-head'>
-            <h1 style={{textAlign: 'center'}}>{`${street_address} ${apt_number && apt_number}`}</h1>
-            <span style={{display: 'flex', justifyContent: 'center'}}>
-              <h3 style={{fontSize: '20px'}}>{`${city} , ${state}`}</h3>
-            </span>
-            <div id='apt-details-title-divider'></div>
-            <div className='bed-bath-div'>
-              <h2 id='bath'>{bathrooms} 🛁</h2>
-              <h2 id='bed'>{bedrooms} 🛏</h2>
-            </div>
-            {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px', fontSize: '22px', textAlign: 'center'}}>{Math.round(percentageofRenters)}% of reviewers recommend</h2>: <h2></h2>}
-            </div>
-        </div>
-        
           <CarouselProvider
           naturalSlideWidth={4}
           naturalSlideHeight={3}
@@ -263,7 +250,7 @@ class AptDetails extends React.Component {
           infinite={true}
           style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
           >
-          <div style={{display: 'flex', marginBottom: '10px', alignItems: 'center'}}>
+          <div style={{display: 'flex', marginTop: '80px', marginBottom: '60px', height: '250px', alignItems: 'center'}}>
             <ButtonBack style={{backgroundColor: 'inherit', border: 'none'}}><img src={process.env.PUBLIC_URL + '/back.png'} style={{width: '20px', height: '20px', marginTop: '5px'}} /></ButtonBack>
                 <Slider style={sliderStyles}>
                   {slides}
@@ -271,13 +258,30 @@ class AptDetails extends React.Component {
               <ButtonNext style={{backgroundColor: 'inherit', border: 'none'}}><img src={process.env.PUBLIC_URL + '/next.png'} style={{width: '20px', height: '20px', marginTop: '5px'}} /></ButtonNext>
           </div>
         </CarouselProvider>
-
-        { this.props.token ? 
+            <div className='apt-details-head'>
+            <h1 style={{textAlign: 'center'}}>{`${street_address} ${apt_number && apt_number}`}</h1>
+            <span style={{display: 'flex', justifyContent: 'center'}}>
+              <h3 style={{fontSize: '20px'}}>{`${city} , ${state}`}</h3>
+            </span>
+            <div className='bed-bath-div'>
+              <h2 id='bath'>{bathrooms} bath</h2>
+              <h2 id='bed'>{bedrooms} bed</h2>
+            </div>
+            {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px', fontSize: '22px'}}>{Math.round(percentageofRenters)}% of reviewers recommend</h2>: <h2></h2>}
+            <div style={{marginTop: '20px'}}>
+            {/* { this.props.token ? 
+          <Link to={`/review/${this.state.apt._id}`} id='leave-review-link'>Start Your Review</Link>
+          :
+          <Link to="/auth" id='leave-review-link'>Login To Start Review</Link>
+        } */}
+        </div>
+        </div> 
+            <div id='apt-details-title-divider'></div>
+            { this.props.token ? 
           <Link to={`/review/${this.state.apt._id}`} id='leave-review-link'>Start Your Review</Link>
           :
           <Link to="/auth" id='leave-review-link'>Login To Start Review</Link>
         }
-        
         <div className='details-review-wrapper'>
           {this.state.reviews.length > 0 ? <>
                         <div className='scroll-reviews'>
