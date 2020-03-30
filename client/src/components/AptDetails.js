@@ -22,24 +22,32 @@ class AptDetails extends React.Component {
       editing: false,
       reviews: [], 
       _id: '',
-      aptFormTitle: '',
-      aptFormDescription: '',
-      aptFormWouldRecommend: '',
-      file: null
+      file: null,
+      aptComplex: ''
     }
   }
   
 
   componentDidMount() {
-   
-
     let {_id} = this.props.match.params
     axios.get(`/apartment/${_id}`).then(res => {
+      console.log('1 apartment', res.data)
       this.setState({
         apt: res.data,
       })
-    }).then(
-      axios.get(`/review/${this.props.match.params._id}`).then(res => {
+      let complex = this.state.apt.complex
+      return complex
+    }).then( complex => {
+      axios.get("/aptcomplex/" + complex).then(res => {
+        console.log('3 apt complex', res.data)
+        this.setState({
+          aptComplex: res.data
+        })
+      })
+    })
+    .then(
+      axios.get(`/review/${_id}`).then(res => {
+        console.log('2 reviews', this.state)
         let aptReviews = res.data
         this.setState({
           reviews: aptReviews.reverse(),
@@ -48,6 +56,8 @@ class AptDetails extends React.Component {
       })
     )
   }
+
+  
 
   handleEditSubmit = (editDetails) => {
     let config = {
@@ -104,7 +114,7 @@ class AptDetails extends React.Component {
       title: this.state.aptFormTitle,
       apt: this.state.apt._id,
       description: this.state.aptFormDescription,
-      wouldRecommend: this.state.aptFormWouldRecommend,
+      starRating: this.state.starRating,
       file: this.state.file
     };
     axios.post('/api/review', reviewObj, config)
@@ -114,7 +124,7 @@ class AptDetails extends React.Component {
           reviews: updatedReviews,
           aptFormTitle: '',
           aptFormDescription: '',
-          aptFormWouldRecommend: '',
+          aptFormRating: '',
           file: null
         })
       })
@@ -135,15 +145,11 @@ class AptDetails extends React.Component {
   }
 
   render() {
-
-
-
-    
-    
-    let {street_address, apt_number, city, state, bathrooms, bedrooms} = this.state.apt;
-    let recommendations = 0;
+  
+    let {street_address, apt_number, city, state, bathrooms, bedrooms, complex_name, complex_website} = this.state.apt;
+    let totalRatings = 0;
     let reviewComponents = this.state.reviews.map((review) => {
-      review.wouldRecommend && recommendations++;
+      totalRatings = totalRatings + review.starRating;
       return <Review handleEditSubmit={this.handleEditSubmit}
                      handleDelete={this.handleDelete}
                      handleChange={this.handleChange}
@@ -151,7 +157,7 @@ class AptDetails extends React.Component {
                      apt={review.apt}
                      title={review.title} 
                      description={review.description} 
-                     wouldRecommend={review.wouldRecommend}
+                     starRating={review.starRating}
                      _id={review._id}
                      userId={this.props.user._id}
                      userName={review.userName}
@@ -160,58 +166,24 @@ class AptDetails extends React.Component {
                      />
     })
 
-    let percentageofRenters = (recommendations / this.state.reviews.length)*100;
+    let averageRating = (totalRatings / this.state.reviews.length);
 
     let aptImages = this.state.reviews.flatMap((review) => {
       return review.images
     })
 
-    console.log('apt images', aptImages)
-
     
     let slides = []
     for (let i = 0; i < aptImages.length; i++) {
       slides.push(
-                  <Slide index={i} style={{ boxSizing: 'border-box'}}>
+                  <Slide key={Math.random() * 6000} index={i} style={{ boxSizing: 'border-box'}}>
                     <img src={aptImages[i].toString()} style={{height: '294px', width: '380px', border: '3px solid white'}} />
                   </Slide>
                   )
     }
 
-    console.log('slides', slides)
-
     let sliderStyles;
     let visibleSlides;
-
-    // sliderStyles = {
-    //   width: '1440px', height: '270px', marginTop: '30px'
-    // }
-    // if (slides.length >= 4) {
-    //   visibleSlides = 4
-    // }
-
-    // responsiveness for slider
-    // if (this.props.windowWidth > 1260) {
-      
-    // }
-    // if (this.props.windowWidth <= 1260) {
-    //   sliderStyles = {
-    //     width: '1080px', height: '270px', marginTop: '30px'
-    //   }
-    //   visibleSlides = 3
-    // }
-    // if (this.props.windowWidth <= 1080) {
-    //   sliderStyles = {
-    //     width: '720px', height: '270px', marginTop: '30px'
-    //   }
-    //   visibleSlides = 2
-    // }
-    // if (this.props.windowWidth <= 720) {
-    //   sliderStyles = {
-    //     width: '360px', height: '270px', marginTop: '30px'
-    //   }
-    //   visibleSlides = 1
-    // }
 
     if (slides.length === 1 || this.props.windowWidth <= 720) {
       sliderStyles = {
@@ -258,6 +230,7 @@ class AptDetails extends React.Component {
               <ButtonNext style={{backgroundColor: 'inherit', border: 'none'}}><img src={process.env.PUBLIC_URL + '/next.png'} style={{width: '20px', height: '20px', marginTop: '5px'}} /></ButtonNext>
           </div>
         </CarouselProvider>
+          <div className='details-and-apt-complex'>
             <div className='apt-details-head'>
             <h1 style={{fontWeight: 'bold'}}>{`${street_address}`}</h1>
             <h1 style={{fontWeight: 'bold'}}>{`${apt_number}`}</h1>
@@ -268,8 +241,17 @@ class AptDetails extends React.Component {
               <h2 id='bath'>{bathrooms} bath</h2>
               <h2 id='bed'>{bedrooms} bed</h2>
             </div>
-            {this.state.reviews.length > 0 ? <h2 style={{minWidth: '330px', fontSize: '22px'}}>{Math.round(percentageofRenters)}% of reviewers recommend</h2>: <h2></h2>}
+            <h2 style={{color: '#808080', fontStyle: 'italic'}}>{this.state.reviews.length > 1 ? this.state.reviews.length + ' ' + 'reviews' : '1 review'}</h2>
+              {this.state.reviews.length > 0 ? <span style={{display: 'flex', alignItems: 'center', height: '30px'}}><img id='star-img' src={process.env.PUBLIC_URL + '/star-icon.png'}/><h2 style={{minWidth: '330px', fontSize: '22px', color: '#42474c'}}>{(Math.round(averageRating * 10) / 10).toFixed(1)}</h2></span> : <h2>No reviews for this apartment</h2>}
             
+            </div>
+            <div className='complex-info'>
+              <h3>{this.state.aptComplex.name}</h3>
+              <h3>{this.state.aptComplex.website}</h3>
+              <div style={{height: '1px', backgroundColor: 'lightgrey', width: '100%', marginTop: '10px', marginBottom: '10px'}}></div>
+              <h5 style={{marginBottom: '8px', color: '#42474c', fontSize: '13px'}}>See more from {this.state.aptComplex.name}</h5>
+              <Link to={`/aptcomplex/${this.state.aptComplex._id}`} className='more-complex-reviews'>Building Reviews</Link>
+            </div>
         </div> 
             <div id='apt-details-title-divider'></div>
             { this.props.token ? 
@@ -280,6 +262,7 @@ class AptDetails extends React.Component {
         <div className='details-review-wrapper'>
           {this.state.reviews.length > 0 ? <>
                         <div className='scroll-reviews'>
+                          {/* <h2 style={{padding: '20px', color: '#808080'}}>{this.state.reviews.length > 1 ? this.state.reviews.length + ' ' + 'reviews' : '1 review'}</h2> */}
                           {reviewComponents}
                         </div>
                                            </> 

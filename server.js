@@ -37,6 +37,8 @@ app.use("/review", require('./routes/review'));
 app.use("/api/review", require('./routes/apiRouter'));
 app.use("/api/reviewImages", require('./routes/apiImageRouter'));
 app.use("/apartment", require('./routes/apartment'));
+app.use("/api/aptComplex", require('./routes/apiAptComplexRouter'));
+app.use("/aptcomplex", require('./routes/aptComplexRouter'));
 app.use("/api/apartment", require('./routes/aptApiRouter'));
 app.use("/user", require('./routes/userRouter'));
 

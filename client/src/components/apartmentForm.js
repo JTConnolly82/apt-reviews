@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+// import AptComplexSearch from './AptComplexSearch';
 import {Redirect} from 'react-router-dom';
 import {withUser} from '../context/UserProvider';
 import './apartmentForm.css';
@@ -16,7 +17,9 @@ class apartmentForm extends React.Component {
       bathrooms: '',
       submitted: false,
       submittedObj: '',
-      isInComplex: false
+      isInComplex: false,
+      complex_name: '',
+      complex_website: ''
     }
   }
 
@@ -45,14 +48,29 @@ class apartmentForm extends React.Component {
     let config = {
       headers: {'Authorization': "bearer " + this.props.token}
     }
-    let submitObj = this.state;
-    axios.post('/api/apartment', submitObj, config)
+    let aptComplexObj = {name: this.state.complex_name, website: this.state.complex_website};
+
+    axios.post('/api/aptComplex', aptComplexObj, config)
+    .then((res) => {
+      let submitAptObj = {
+        street_address: this.state.street_address,
+        apt_number: this.state.apt_number,
+        city: this.state.city,
+        state: this.state.state,
+        bedrooms: this.state.bedrooms,
+        bathrooms: this.state.bathrooms,
+        complex: res.data._id
+      }
+      return submitAptObj;
+    }).then((submitAptObj) => {
+      axios.post('/api/apartment', submitAptObj, config)
       .then((res)=> {
         this.setState({
           submitted: true,
           submittedObj: res.data
         })
       })
+    })
       .catch((err)=> {
         console.dir(err)
       })
@@ -99,6 +117,7 @@ class apartmentForm extends React.Component {
              (<div></div>)
              :
              (<div style={{display: 'flex', flexDirection: 'column', width: '100%', marginTop: '15px'}}>
+               {/* <AptComplexSearch /> */}
                 <input onChange={this.handleChange} name='complex_name' className='apt-inputs' placeholder='name of apt complex' />
                 <input onChange={this.handleChange} name='complex_website' className='apt-inputs' placeholder="apartment complex's website url" />
               </div>)

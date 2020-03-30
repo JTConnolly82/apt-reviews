@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import Rater from 'react-rater'
+import 'react-rater/lib/react-rater.css'
 import { withUser } from "../context/UserProvider";
 import "./reviewpage.css";
 
@@ -13,7 +15,7 @@ class ReviewPage extends React.Component {
       _id: "",
       aptFormTitle: "",
       aptFormDescription: "",
-      aptFormWouldRecommend: "",
+      aptFormRating: 0,
       files: [],
       imageDescriptions: [],
       thumbnailFiles: [],
@@ -74,6 +76,12 @@ class ReviewPage extends React.Component {
     this.setState({ [name]: value });
   };
 
+  handleRating = () => {
+    this.setState({
+      // aptFormRating: 
+    })
+  }
+
   handleSubmit = e => {
     e.preventDefault();
     // const formData = new FormData();
@@ -93,13 +101,15 @@ class ReviewPage extends React.Component {
       }
     };
 
-    let formData = new FormData();
-    for (let i = 0; i < this.state.files[0].length; i++) {
-      formData.append("file", this.state.files[0][i]);
-    }
+    
 
     let responseMsg;
 
+    if (this.state.files.length > 0) {
+      let formData = new FormData();
+    for (let i = 0; i < this.state.files[0].length; i++) {
+      formData.append("file", this.state.files[0][i]);
+    }
     axios
       .post("/api/reviewImages", formData, filesConfig)
       .then(res => {
@@ -107,7 +117,7 @@ class ReviewPage extends React.Component {
           title: this.state.aptFormTitle,
           apt: this.state.apt._id,
           description: this.state.aptFormDescription,
-          wouldRecommend: this.state.aptFormWouldRecommend,
+          starRating: this.state.aptFormRating,
           images: res.data
         };
         axios
@@ -116,13 +126,33 @@ class ReviewPage extends React.Component {
             this.setState({
               aptFormTitle: "",
               aptFormDescription: "",
-              aptFormWouldRecommend: "",
+              aptFormRating: 0,
               files: null
             });
             this.props.history.push("/apartment/" + this.state.apt._id);
           })
           .catch(err => console.dir(err));
       });
+    } else {
+      let reviewObj = {
+        title: this.state.aptFormTitle,
+        apt: this.state.apt._id,
+        description: this.state.aptFormDescription,
+        starRating: this.state.aptFormRating
+      }
+      axios
+          .post("/api/review", reviewObj, config)
+          .then(res => {
+            this.setState({
+              aptFormTitle: "",
+              aptFormDescription: "",
+              aptFormRating: 0,
+              files: null
+            });
+            this.props.history.push("/apartment/" + this.state.apt._id);
+          })
+          .catch(err => console.dir(err));
+    }
     
   };
 
@@ -188,23 +218,9 @@ class ReviewPage extends React.Component {
               )}
             </span>
             <div className="recommend-form">
-              <h4>Recommend this apartment?</h4>
+              <h4>Rating: </h4>
               <div style={{ display: "flex", marginLeft: "10px" }}>
-                <h4 style={{ marginRight: "5px" }}>Yes</h4>
-                <input
-                  onChange={this.handleFormChange}
-                  name="aptFormWouldRecommend"
-                  type="radio"
-                  value="true"
-                  style={{ marginRight: "5px" }}
-                />
-                <h4 style={{ marginRight: "5px" }}>No</h4>
-                <input
-                  onChange={this.handleFormChange}
-                  name="aptFormWouldRecommend"
-                  type="radio"
-                  value="false"
-                />
+               <Rater total={5} rating={this.state.aptFormRating} onRate={(rating)=>this.setState({aptFormRating: rating.rating})}/>
               </div>
             </div>
             <button id="apt-details-btn">Post Review</button>

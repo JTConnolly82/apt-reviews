@@ -107,6 +107,12 @@ border-color: #14a27e;
   height: 80vh;
 } */
 
+.details-and-apt-complex {
+  display: flex;
+  width: 800px;
+  padding: 20px;
+}
+
 #login-leave-review {
   margin-top: 15px;
   padding: 5px 10px 5px 10px;
@@ -173,12 +179,40 @@ border-color: #14a27e;
 #apt-details-title-divider {
   width: 850px;
   height: 1px;
-  background-color: rgb(235, 235, 235);
-  margin-top: 20px;
-  margin-bottom: 20px;
+  background-color: rgb(221, 221, 221);
+  margin-top: 10px;
+  margin-bottom: 30px;
 }
 
+.complex-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(244, 244, 244);
+  height: 100%;
+  padding: 20px;
+  width: 300px;
+}
 
+.more-complex-reviews {
+  padding: 6px;
+  color: #008060;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bolder;
+  width: 150px;
+  letter-spacing: .6px;
+  cursor: pointer;
+  background-color: #9fd7cf;
+  border: none;
+  text-align: center;
+}
+
+#star-img {
+  width: 20px;
+  height: 20px;
+  filter: invert(35%) sepia(47%) saturate(1181%) hue-rotate(123deg) brightness(96%) contrast(95%);
+}
 
 @media (max-width: 1000px) {
   .apt-details-wrapper {
@@ -198,6 +232,9 @@ border-color: #14a27e;
   #apt-details-title-divider {
     width: 700px;
   }
+  .details-and-apt-complex {
+    width: 700px;
+  }
 }
 
 @media (max-width: 840px) {
@@ -205,6 +242,9 @@ border-color: #14a27e;
     width: 500px;
   }
   #apt-details-title-divider {
+    width: 500px;
+  }
+  .details-and-apt-complex {
     width: 500px;
   }
 }
@@ -219,5 +259,19 @@ border-color: #14a27e;
   .no-review-text {
     font-size: 18px;
     text-align: center;
+  }
+  .details-and-apt-complex {
+    width: 370px;
+    flex-direction: column;
+    align-items: flex-start
+  }
+  .complex-info {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-top: 20px;
+  }
+  .complex-info button {
+    align-self: center;
   }
 }

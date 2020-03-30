@@ -8,7 +8,12 @@ const aptSchema = new Schema({
   city: String,
   state: String,
   bedrooms: Number,
-  bathrooms: Number
+  bathrooms: Number,
+  complex: {
+    type: Schema.Types.ObjectId,
+    ref: 'Complex',
+    required: false
+  }
 }, {timestamps: true});
 
 module.exports = mongoose.model('Apartment', aptSchema);

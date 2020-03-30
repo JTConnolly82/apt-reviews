@@ -9,6 +9,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Account from './components/Account'
 import apartmentForm from './components/apartmentForm';
 import AptDetails from './components/AptDetails';
+import AptComplex from './components/AptComplex';
 import Footer from './components/Footer';
 
 import './App.css';
@@ -52,6 +53,7 @@ class App extends React.Component {
           />
           <Route path='/apartment/:_id' component={AptDetails} />
           <Route path='/account/:_id' component={Account} />
+          <Route path='/aptComplex/:_id' component={AptComplex} />
         </Switch>
         {/* <Footer /> */}
       </div>

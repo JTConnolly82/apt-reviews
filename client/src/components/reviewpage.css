@@ -47,6 +47,7 @@ box-shadow: 0 1px 1px rgba(101, 101, 101,0.19),
 .recommend-form {
   width: 365px;
   display: flex;
+  margin-bottom: 20px;
 }
 
 #title-input {

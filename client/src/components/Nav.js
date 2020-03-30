@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import AptSearchbar from './AptSearchbar';
 import './Nav.css';
 import {withUser} from '../context/UserProvider';
 
@@ -36,7 +37,6 @@ const Nav = (props) => {
       
       <div className='nav-container'>
         <Link to='/'><h1 className='nav-title'>Apt Reviews  </h1></Link>
-        
         <div className='nav-options'>
           {/* <Link to='/apartment' className='nav-links'>Add Apt</Link> */}
           {

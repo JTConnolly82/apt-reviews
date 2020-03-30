@@ -1,0 +1,66 @@
+
+
+
+.complex-title-div {
+  margin-top: 60px;
+  margin-left: 60px;
+  width: 600px;
+  height: 100%;
+  padding-bottom: 40px;
+}
+
+
+
+#complex-title {
+  font-size: 70px; 
+  margin-bottom: 20px;
+}
+
+#title-divider-div {
+  height: 1px;
+  background-color: lightgrey;
+  width: 100%;
+  margin-top: 30px;
+}
+
+#complex-website-link {
+  padding: 6px;
+  color: #008060;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: bolder;
+  width: 150px;
+  letter-spacing: .6px;
+  cursor: pointer;
+  background-color: #9fd7cf;
+  border: none;
+  text-align: center;
+}
+
+.apartment-units {
+  margin-top: 90px;
+  margin-bottom: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+@media (max-width: 750px) {
+  .complex-title-div {
+    width: 550px;
+  }
+}
+
+@media (max-width: 650px) {
+  .complex-title-div {
+    width: 410px;
+    margin-left: 20px;
+  }
+  #complex-title {
+    font-size: 70px;
+  }
+  #title-divider-div {
+    width: 410px;
+  }
+}

@@ -13,7 +13,7 @@ const reviewSchema = new Schema({
   },
   aptAddress: String,
   description: String,
-  wouldRecommend: Boolean,
+  starRating: Number,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User',

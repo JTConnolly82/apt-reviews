@@ -1,6 +1,7 @@
 import React from 'react';
-import './review.css'
-import {withUser} from '../context/UserProvider'
+import Rater from 'react-rater';
+import './review.css';
+import {withUser} from '../context/UserProvider';
 
 
 class Review extends React.Component {
@@ -10,7 +11,7 @@ class Review extends React.Component {
     this.state = {
       title: props.title,
       description: props.description,
-      wouldRecommend: props.wouldRecommend,
+      starRating: props.starRating,
       editing: false,
       user: ''
     }
@@ -70,7 +71,7 @@ class Review extends React.Component {
     }
 
     let mappedImageUrls = this.props.images.map((url) => {
-      return <img className='review-images' src={url.toString()} alt='pic' />
+      return <img key={Math.random() * 6000} className='review-images' src={url.toString()} alt='pic' />
     })
 
     return (
@@ -94,13 +95,13 @@ class Review extends React.Component {
             <h3>👤 {this.props.userName}</h3>
             <h5 style={{color: 'grey'}}>{displayedDate}</h5>
             <span style={{display: 'flex', alignItems: 'center', marginBottom: '25px', marginTop: '10px'}}>
-              <h4 style={{marginRight: '4px', color: '#42474c'}}>Recommends?{ this.props.wouldRecommend ? '👍' : '👎' }</h4>
+              <div style={{marginRight: '4px'}}><Rater total={5} rating={this.state.starRating} interactive={false} /></div>
             </span>
             <h2>{this.props.title}</h2>
             <h3 style={{marginBottom: '10px'}}>{this.props.description}</h3>
             <div className='images-and-button-container'>
               <div className='review-images-container'>
-                {mappedImageUrls.length > 0 ? mappedImageUrls : <h3>No images for this review</h3>}
+                {mappedImageUrls.length > 0 ? mappedImageUrls : <h4>(No images for this review)</h4>}
               </div>
               {/* <button className='image-reveal-button' id='img-button' onClick={this.setImageContainer}>See All Pictures</button> */}
             </div>

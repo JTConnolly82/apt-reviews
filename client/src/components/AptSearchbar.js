@@ -99,6 +99,7 @@ class AptSearchbar extends React.Component {
                   placeholder='Search'
                   onChange={this.handleChange}
                   onRemove={this.handleRemove}
+                  maxMenuHeight={'200px'}
                    />
           {this.state.selectedApt ? 
             <Link to={`/apartment/${this.state.selectedApt}`} id='search-button'><img id='search-png' src={process.env.PUBLIC_URL + '/search.png'} /></Link>

@@ -1,0 +1,41 @@
+
+
+.apt-card-container {
+  width: 700px;
+  padding: 35px;
+  height: 140px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  -webkit-box-shadow: 0 1px 1px rgba(170, 170, 170, 0.16), 
+  0 2px 2px rgba(170, 170, 170, 0.16), 
+  0 4px 4px rgba(170, 170, 170, 0.16);
+box-shadow: 0 1px 1px rgba(101, 101, 101,0.19), 
+0 2px 2px rgba(170, 170, 170, 0.16), 
+0 4px 4px rgba(170, 170, 170, 0.16); 
+margin-top: 15px;
+}
+
+#view-apt-button {
+  color: #ffffff;
+  background-color: #008060;
+  padding: 4px 10px 4px 10px;
+  border-radius: 3px;
+  border: 2px solid #008060;
+  font-size: 18px;
+  cursor: pointer;
+  align-self: center;
+}
+
+
+@media (max-width: 750px) {
+  .apt-card-container {
+    width: 600px;
+  }
+}
+
+@media (max-width: 650px) {
+  .apt-card-container {
+    width: 410px;
+  }
+}

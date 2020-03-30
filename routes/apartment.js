@@ -26,7 +26,20 @@ apartmentRouter.get('/:aptId', (req, res, next) => {
       return next(err);
     };
     return res.status(200).send(apartment);
+    });
   });
+
+  apartmentRouter.get('/wherecomplex/:complexId', (req, res, next) => {
+    console.log('req params', req.params)
+    Apartment.find({complex: req.params.complexId}, (err, apartments) => {
+      if (err) {
+        res.status(500);
+        return next(err);
+      };
+      console.log('getting apartments')
+      return res.status(200).send(apartments);
+    });
   });
+
 
 module.exports = apartmentRouter
